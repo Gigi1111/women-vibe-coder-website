@@ -175,9 +175,9 @@
     .brand-logo {
       width: 40px;
       height: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25), 0 0 18px rgba(168, 85, 247, 0.18);
       flex-shrink: 0;
+      /* Transparent logo: soft neon glow instead of a boxed frame */
+      filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.35));
     }
     .brand-title {
       font-family: var(--font-headline);
@@ -360,45 +360,6 @@
       flex-wrap: wrap;
       gap: var(--space-md);
       align-items: center;
-    }
-    .community-drawer {
-      background: var(--surface-container-low);
-      border: 1px solid var(--outline-variant);
-      border-radius: var(--rounded-lg);
-      padding: var(--space-md) var(--space-lg);
-      display: none;
-      gap: var(--space-sm);
-    }
-    .community-drawer.is-open {
-      display: grid;
-      border-color: color-mix(in srgb, var(--secondary) 45%, transparent);
-    }
-    .drawer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-    .drawer-title {
-      font-family: var(--font-label);
-      font-size: var(--label-size);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--secondary);
-    }
-    .drawer-code {
-      font-family: var(--font-label);
-      font-size: var(--label-size);
-      color: var(--on-surface);
-      background: var(--background);
-      border: 1px solid var(--outline-variant);
-      border-radius: var(--rounded);
-      padding: var(--space-sm) var(--space-md);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: var(--space-sm);
-      flex-wrap: wrap;
     }
 
     .wish-chips {
@@ -700,7 +661,7 @@
         radial-gradient(120% 90% at 85% 0%, color-mix(in srgb, var(--secondary) 18%, transparent), transparent 60%),
         var(--background);
     }
-    .slide-thumb-logo { width: clamp(28px, 4vw, 44px); height: auto; border-radius: 8px; }
+    .slide-thumb-logo { width: clamp(28px, 4vw, 44px); height: auto; }
     .slide-thumb-kicker {
       font-family: var(--font-label);
       font-size: 0.72rem;
@@ -708,7 +669,22 @@
       text-transform: uppercase;
       color: var(--primary);
     }
-    .kit-item.is-cyan .slide-thumb-kicker { color: var(--secondary); }
+    .kit-item.is-cyan .slide-thumb-kicker,
+    .slide-thumb-kicker.is-cyan { color: var(--secondary); }
+    .slide-thumb-pill {
+      align-self: flex-start;
+      margin-top: clamp(2px, 0.6vw, 6px);
+      padding: 3px 12px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--primary) 70%, transparent);
+      background: color-mix(in srgb, var(--primary) 14%, transparent);
+      font-size: clamp(0.62rem, 0.9vw, 0.76rem);
+      color: var(--on-surface);
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     .slide-thumb-title {
       font-family: var(--font-headline);
       font-weight: 700;
@@ -1109,7 +1085,7 @@
       <div class="topbar">
         <div class="brand-group">
           <span class="brand-home">
-            <img class="brand-logo" src="assets/logo.png" width="40" height="40" alt="Women Vibe Coders logo: a coffee cup with a prompt chevron">
+            <img class="brand-logo" src="assets/logo-transparent.png" width="40" height="40" alt="Women Vibe Coders logo: a coffee cup with a prompt chevron">
             <span class="brand-title" data-editable="brandTitle">Women Vibe Coders</span>
           </span>
           <nav class="nav-links" aria-label="Page sections">
@@ -1140,35 +1116,16 @@
         </p>
 
         <div class="cta-row">
-          <button type="button" class="btn-neon" onclick="toggleCommunityDrawer('luma')">
+          <a class="btn-neon" href="https://luma.com/calendar/cal-Pkz6yetEPWfvMfW" target="_blank" rel="noopener">
             <i data-lucide="calendar-heart" width="16" height="16" aria-hidden="true"></i>
             <span>Luma Community</span>
-          </button>
-          <button type="button" class="btn-neon is-cyan" onclick="toggleCommunityDrawer('discord')">
+          </a>
+          <a class="btn-neon is-cyan" href="https://discord.gg/z2NAsePDAG" target="_blank" rel="noopener">
             <i data-lucide="message-circle-heart" width="16" height="16" aria-hidden="true"></i>
             <span>Join Discord</span>
-          </button>
-          <!-- TODO: replace href with the Women Vibe Coders LinkedIn page URL (also in the closing section) -->
-          <a class="btn-ghost" href="https://www.linkedin.com/company/YOUR-PAGE" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-            <span>Follow on LinkedIn</span>
           </a>
         </div>
 
-        <div class="community-drawer" id="community-drawer" aria-live="polite">
-          <div class="drawer-header">
-            <span class="drawer-title" id="drawer-title">Community Space</span>
-            <button type="button" class="btn-ghost" onclick="closeCommunityDrawer()" aria-label="Close community details">Close</button>
-          </div>
-          <p id="drawer-desc"></p>
-          <div class="drawer-code">
-            <span id="drawer-handle"></span>
-            <button type="button" class="btn-ghost" id="drawer-copy-btn" onclick="copyCommunityHandle()">
-              <i data-lucide="copy" width="14" height="14" aria-hidden="true"></i>
-              <span>Copy Handle</span>
-            </button>
-          </div>
-        </div>
       </div>
 
     </section>
@@ -1323,18 +1280,19 @@
       <div class="kit-downloads reveal-item" aria-label="Host Welcome Slides and Starter Kit downloads">
         <div class="kit-grid">
           <div class="neon-panel kit-item">
-            <div class="kit-thumb slide-thumb" role="img" aria-label="First page of the Welcome Slides: Welcome! Nobody here is expected to know code.">
-              <img class="slide-thumb-logo" src="assets/logo.png" alt="" width="44" height="44">
-              <span class="slide-thumb-kicker">Women Vibe Coders</span>
-              <span class="slide-thumb-title">Welcome! Nobody here is expected to know code.</span>
-              <span class="slide-thumb-body">Grab your tea or coffee, introduce yourself and one tool you wish existed in your daily life.</span>
+            <div class="kit-thumb slide-thumb" role="img" aria-label="First slide of the Welcome Slides: A cozy space to build with AI. No fee. No stress. And no experience needed.">
+              <img class="slide-thumb-logo" src="assets/logo-transparent.png" alt="" width="44" height="44">
+              <span class="slide-thumb-kicker is-cyan">Women Vibe Coders</span>
+              <span class="slide-thumb-title">A cozy space to build with AI</span>
+              <span class="slide-thumb-body">No fee. No stress. And no experience needed.</span>
+              <span class="slide-thumb-pill">gigi1111.github.io/women-vibe-coder-website</span>
             </div>
             <div class="kit-item-foot">
               <div>
                 <span class="kit-item-title">Welcome Slides</span>
-                <span class="kit-item-meta">Ready-to-present deck for your first gathering</span>
+                <span class="kit-item-meta">8-slide PowerPoint deck, ready to present at your first gathering</span>
               </div>
-              <a class="btn-neon" href="assets/downloads/women-vibe-coders-welcome-slides.pdf" download>
+              <a class="btn-neon" href="assets/downloads/women-vibe-coders-welcome-slides.pptx" download>
                 <i data-lucide="download" width="16" height="16" aria-hidden="true"></i>
                 <span>Download Slides</span>
               </a>
@@ -1450,18 +1408,13 @@
         </p>
       </div>
       <div class="cta-row">
-        <button type="button" class="btn-neon" onclick="toggleCommunityDrawer('luma'); window.scrollTo({top: 0, behavior: 'smooth'});">
+        <a class="btn-neon" href="https://luma.com/calendar/cal-Pkz6yetEPWfvMfW" target="_blank" rel="noopener">
           <i data-lucide="calendar-heart" width="16" height="16" aria-hidden="true"></i>
           <span>Luma Community</span>
-        </button>
-        <button type="button" class="btn-neon is-cyan" onclick="toggleCommunityDrawer('discord'); window.scrollTo({top: 0, behavior: 'smooth'});">
+        </a>
+        <a class="btn-neon is-cyan" href="https://discord.gg/z2NAsePDAG" target="_blank" rel="noopener">
           <i data-lucide="message-circle-heart" width="16" height="16" aria-hidden="true"></i>
           <span>Join Discord</span>
-        </button>
-        <!-- TODO: replace href with the Women Vibe Coders LinkedIn page URL -->
-        <a class="btn-ghost" href="https://www.linkedin.com/company/YOUR-PAGE" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-          <span>Follow on LinkedIn</span>
         </a>
       </div>
     </section>
@@ -1502,21 +1455,7 @@
       }
     ];
 
-    const COMMUNITY_INFO = {
-      luma: {
-        title: `Women Vibe Coders · Luma Community`,
-        desc: `Browse upcoming 2-hour cozy circles, RSVP for an open seat in Berlin, or list your own city’s gathering under our Luma Community calendar.`,
-        handle: `Luma Community: lu.ma/women-vibe-coders`
-      },
-      discord: {
-        title: `Women Vibe Coders · Discord Space`,
-        desc: `A friendly, moderated hangout for asking beginner questions without judgment, sharing tiny project screenshots, and posting host recaps.`,
-        handle: `Discord Invite: discord.gg/women-vibe-coders`
-      }
-    };
-
     // ── State ─────────────────────────────────────────────────────────────────
-    let currentDrawer = null;
     let radarView = 'global';
     let showNextCity = false;
     let cachedTopo = null;
@@ -1532,49 +1471,6 @@
       } catch (err) {
         // Ignore persistence errors in standalone preview
       }
-    }
-
-    // ── Hero Community Drawer & Interactive Demo ──────────────────────────────
-    function toggleCommunityDrawer(kind) {
-      const drawer = document.getElementById('community-drawer');
-      const titleEl = document.getElementById('drawer-title');
-      const descEl = document.getElementById('drawer-desc');
-      const handleEl = document.getElementById('drawer-handle');
-      const copyBtn = document.getElementById('drawer-copy-btn');
-      if (!drawer || !COMMUNITY_INFO[kind]) return;
-
-      if (currentDrawer === kind && drawer.classList.contains('is-open')) {
-        closeCommunityDrawer();
-        return;
-      }
-      currentDrawer = kind;
-      const info = COMMUNITY_INFO[kind];
-      if (titleEl) titleEl.textContent = info.title;
-      if (descEl) descEl.textContent = info.desc;
-      if (handleEl) handleEl.textContent = info.handle;
-      if (copyBtn) {
-        const sp = copyBtn.querySelector('span');
-        if (sp) sp.textContent = `Copy Handle`;
-      }
-      drawer.classList.add('is-open');
-    }
-
-    function closeCommunityDrawer() {
-      const drawer = document.getElementById('community-drawer');
-      if (drawer) drawer.classList.remove('is-open');
-      currentDrawer = null;
-    }
-
-    function copyCommunityHandle() {
-      const handleEl = document.getElementById('drawer-handle');
-      const copyBtn = document.getElementById('drawer-copy-btn');
-      if (!handleEl || !copyBtn) return;
-      const text = handleEl.textContent;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(function() {});
-      }
-      const sp = copyBtn.querySelector('span');
-      if (sp) sp.textContent = `Copied!`;
     }
 
     // ── Scrollytelling Engine (Steps + Persistent Blueprint Graphic) ──────────
