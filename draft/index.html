@@ -684,7 +684,7 @@
     }
     .kit-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--space-lg);
       align-items: stretch;
     }
@@ -753,6 +753,24 @@
       font-size: clamp(0.74rem, 1.1vw, 0.86rem);
       color: var(--on-surface);
       line-height: 1.4;
+    }
+    .kit-thumb-img {
+      padding: 0;
+      display: block;
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .kit-thumb-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .kit-thumb-img:hover,
+    .kit-thumb-img:focus-visible {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--secondary) 60%, transparent);
+      box-shadow: var(--glow-secondary);
     }
     .kit-item-foot {
       display: flex;
@@ -1423,13 +1441,9 @@
           </div>
 
           <div class="neon-panel is-cyan kit-item">
-            <div class="kit-thumb kit-thumb-list" role="img" aria-label="Starter Kit contents: three free beginner resources, prompts to copy and safety basics">
-              <span class="slide-thumb-kicker">Starter Kit · 10 pages</span>
-              <span class="kit-thumb-line">&#8250; Kit 1 · Easy-Vibe course, step by step</span>
-              <span class="kit-thumb-line">&#8250; Kit 2 · Pick your first AI building tool</span>
-              <span class="kit-thumb-line">&#8250; Kit 3 · How-to guide for when you're stuck</span>
-              <span class="kit-thumb-line">&#8250; Prompts to copy, staying safe, 4-week plan</span>
-            </div>
+            <a class="kit-thumb kit-thumb-img" href="../starter-kit/index.html" target="_blank" rel="noopener" aria-label="Open the Starter Kit page">
+              <img src="../assets/starter-kit-preview.jpg" alt="First page of the Starter Kit: Your first steps into building with AI" width="960" height="540" loading="lazy">
+            </a>
             <div class="kit-item-foot">
               <div>
                 <span class="kit-item-title">Starter Kit</span>

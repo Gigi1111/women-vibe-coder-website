@@ -80,6 +80,7 @@
     editing: null,           // comment id being edited
     confirmDelete: null,     // comment id waiting for delete confirmation
     drafts: {},              // unsent text keyed by 'reply:<id>' / 'edit:<id>'
+    mentions: {},            // the "@Name " a reply box was started with, keyed like drafts
     editingName: false,
     panelOpen: false,
     picking: false
@@ -650,14 +651,26 @@
     item.appendChild(h('p', { class: 'wvc-text', text: c.text }));
 
     var actions = h('div', { class: 'wvc-actions' });
-    if (!isReply) {
-      actions.appendChild(h('button', { type: 'button', class: 'wvc-link', onclick: function (e) {
-        e.stopPropagation();
+    // Every comment can be answered. Replies stay in one thread; answering a
+    // reply starts with "@Name" so it's clear who you're responding to.
+    actions.appendChild(h('button', { type: 'button', class: 'wvc-link', onclick: function (e) {
+      e.stopPropagation();
+      var key = 'reply:' + threadId;
+      if (isReply && c.name) {
+        var mention = '@' + c.name + ' ';
+        var current = state.drafts[key] || '';
+        var previous = state.mentions[key];
+        if (previous && current.indexOf(previous) === 0) current = current.slice(previous.length);
+        state.mentions[key] = mention;
+        state.drafts[key] = mention + current;
+        state.replying = threadId;
+      } else {
         state.replying = state.replying === threadId ? null : threadId;
-        state.active = threadId;
-        render();
-      } }, ['Reply']));
-    }
+      }
+      state.active = threadId;
+      state.focusReply = state.replying === threadId;
+      render();
+    } }, ['Reply']));
     if (canChange(c)) {
       if (state.confirmDelete === c.id) {
         actions.appendChild(h('span', { class: 'wvc-confirm', text: 'Delete this comment?' }));
@@ -740,9 +753,14 @@
         h('button', { type: 'submit', class: 'wvc-btn' }, ['Reply'])
       ]));
       li.appendChild(form);
+      var focusNow = state.focusReply;
+      state.focusReply = false;
       setTimeout(function () {
         var target = nameInput && !nameInput.value ? nameInput : ta;
-        if (!li.contains(document.activeElement)) target.focus();
+        if (focusNow || !li.contains(document.activeElement)) {
+          target.focus();
+          if (target === ta) ta.setSelectionRange(ta.value.length, ta.value.length);
+        }
       }, 0);
     }
     return li;
