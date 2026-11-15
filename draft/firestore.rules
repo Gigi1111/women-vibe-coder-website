@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /comments/{commentId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'text', 'parentId', 'anchor', 'createdAt', 'editedAt'])
+        && request.resource.data.uid == request.auth.uid
+        && validName(request.resource.data.name)
+        && validText(request.resource.data.text)
+        && (request.resource.data.parentId == null || request.resource.data.parentId is string)
+        && (request.resource.data.anchor == null || request.resource.data.anchor is map)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.editedAt == null;
+
+      allow update: if request.auth != null
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['text', 'editedAt'])
+        && validText(request.resource.data.text)
+        && request.resource.data.editedAt == request.time;
+
+      allow delete: if request.auth != null
+        && resource.data.uid == request.auth.uid;
+    }
+
+    function validName(n) { return n is string && n.size() > 0 && n.size() <= 60; }
+    function validText(t) { return t is string && t.size() > 0 && t.size() <= 2000; }
+  }
+}
