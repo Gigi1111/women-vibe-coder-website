@@ -10,4 +10,4 @@
 - DataCamp Guide: Prompting workflows, tool categories, and safety practices.
 
 ## ✏️ Live Content Editing System
-- Toggle `[Preview | Edit Mode]` enables `contenteditable` on page text so organizers can edit text directly on screen.
+- No on-page editing. Text is edited in `index.html`; each element is labelled with `data-editable="key"` (e.g. `heroTitle`, `hostIntro`) so copy can be swapped by name.

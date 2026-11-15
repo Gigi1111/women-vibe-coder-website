@@ -25,5 +25,5 @@
 1. **Scrollytelling Motion**: Section snapping with subtle glow transitions.
 2. **Interactive Resource Cards**: Clickable web preview cards linking directly to external beginner guides (LogicTrail & DataCamp).
 3. **Local Meetup Host Guide**: 4-stage guide for launching cozy 10-guest local chapter meetups.
-4. **Live Content Editing (`contenteditable`)**: Toggle between `[Preview | Edit Mode]` to edit site copy directly on screen.
+4. **Copy Keys**: Each piece of site text carries a `data-editable="key"` label (e.g. `heroTitle`) so copy can be updated by name in `index.html`. There is no on-page edit mode; don't add one back.
 5. **SEO & GEO Optimization**: Embedded JSON-LD schema graphs (`Organization`, `CommunityGroup`, `Event`) for search engine and AI agent discoverability.

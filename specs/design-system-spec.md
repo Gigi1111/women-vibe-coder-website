@@ -27,4 +27,3 @@
 ## 🎛️ Interaction Principles
 - Hover scale (`transform: translateY(-4px)`) on resource cards and CTAs.
 - Glassmorphic backdrop blur (`backdrop-filter: blur(12px)`).
-- On-screen direct editing toggle (`contenteditable`) for live text updates.

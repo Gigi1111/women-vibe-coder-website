@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="neon_noir">
+  <title>Women Vibe Coders — A Cozy Space to Build with AI</title>
+  <meta name="description" content="A supportive space for women to start building with AI. No registration, no fee, we just want to create.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#07070d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Women Vibe Coders — A Supportive Space for Women to Start Building with AI">
+  <meta property="og:description" content="A supportive space for women to start building with AI. No registration, no fee, we just want to create.">
+  <meta property="og:url" content="https://gigi1111.github.io/women-vibe-coder-website/">
+  <meta property="og:image" content="https://gigi1111.github.io/women-vibe-coder-website/assets/og-image.png">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js" defer></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+
+      /* Dark obsidian surfaces */
+      --background: #07070d;
+      --surface-container-low: #0d0d17;
+      --surface-container: #121220;
+      --surface-container-high: #1a1a2e;
+
+      /* Text */
+      --on-surface: #ece8f8;
+      --on-surface-variant: #a8a0c0;
+
+      /* Lines */
+      --outline: #534b6b;
+      --outline-variant: #29243d;
+
+      /* Neon violet & cyan accents */
+      --primary: #bc7dff;
+      --on-primary: #0d041a;
+      --primary-container: #381866;
+      --on-primary-container: #f0e2ff;
+      --secondary: #22f3e6;
+      --on-secondary: #031a19;
+      --tertiary: #e6b8ff;
+      --error: #ff5c77;
+      --on-error: #1a0308;
+
+      /* Semantic */
+      --positive: #22f3e6;
+      --warning: #f5c451;
+      --focus: #22f3e6;
+
+      /* Data series */
+      --data-1: #bc7dff;
+      --data-2: #22f3e6;
+      --data-3: #e6b8ff;
+      --data-4: #7aa2ff;
+      --data-context: #3b3554;
+
+      /* Fonts */
+      --font-headline: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-label: 'Space Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.5rem;
+      --rounded-full: 0.875rem;
+
+      /* Effects */
+      --glow-text: 0 0 12px currentColor;
+      --glow-primary: 0 0 20px color-mix(in srgb, var(--primary) 38%, transparent);
+      --glow-secondary: 0 0 20px color-mix(in srgb, var(--secondary) 35%, transparent);
+      --neon-border: 1px solid color-mix(in srgb, var(--primary) 34%, transparent);
+      --neon-border-lit: 1px solid color-mix(in srgb, var(--primary) 60%, transparent);
+      --cyan-border: 1px solid color-mix(in srgb, var(--secondary) 34%, transparent);
+      --cyan-border-lit: 1px solid color-mix(in srgb, var(--secondary) 60%, transparent);
+      --neon-inset: inset 0 0 18px color-mix(in srgb, var(--primary) 10%, transparent);
+      --cyan-inset: inset 0 0 18px color-mix(in srgb, var(--secondary) 9%, transparent);
+      --ambient-violet: radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--primary) 13%, transparent), transparent 48%);
+      --ambient-cyan: radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--secondary) 10%, transparent), transparent 44%);
+      --scanlines: repeating-linear-gradient(to bottom, transparent 0 3px, color-mix(in srgb, var(--on-surface) 2.5%, transparent) 3px 4px);
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.5rem, 1.4rem + 4vw, 4.35rem);
+      --headline-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+      --subhead-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+      --body-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 140ms;
+      --dur-short: 260ms;
+      --dur-long: 460ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      background-image: var(--ambient-violet), var(--ambient-cyan), var(--scanlines);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    header { position: static !important; }
+    img, svg { max-width: 100%; display: block; }
+    button, input, textarea { font-family: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Layout shell — overflow-x: clip so sticky scroller stays intact */
+    .page-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      overflow-x: clip;
+      display: grid;
+      gap: var(--space-3xl);
+    }
+    .page-shell * { min-width: 0; }
+
+    /* Top navigation & Edit Mode bar */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .brand-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25), 0 0 18px rgba(168, 85, 247, 0.18);
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: var(--on-surface);
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .nav-anchor {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      transition: color var(--dur-micro) var(--ease-out), text-shadow var(--dur-micro) var(--ease-out);
+    }
+    .nav-anchor:hover {
+      color: var(--secondary);
+      text-shadow: var(--glow-text);
+    }
+
+    /* Mode toggle [Preview | Edit Mode] */
+    .mode-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .mode-switch {
+      display: inline-flex;
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-xs);
+      gap: var(--space-xs);
+    }
+    .mode-btn {
+      min-height: 40px;
+      padding: var(--space-xs) var(--space-md);
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      background: transparent;
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-short) var(--ease-in-out),
+                  color var(--dur-short) var(--ease-in-out),
+                  border-color var(--dur-short) var(--ease-in-out),
+                  box-shadow var(--dur-short) var(--ease-in-out);
+    }
+    .mode-btn:hover {
+      color: var(--on-surface);
+    }
+    .mode-btn.is-active[data-mode="preview"] {
+      background: var(--surface-container-high);
+      color: var(--primary);
+      border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+      box-shadow: var(--glow-primary);
+    }
+    .mode-btn.is-active[data-mode="edit"] {
+      background: var(--surface-container-high);
+      color: var(--secondary);
+      border-color: color-mix(in srgb, var(--secondary) 55%, transparent);
+      box-shadow: var(--glow-secondary);
+    }
+
+    .edit-toolbar {
+      display: none;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      border: var(--cyan-border);
+      box-shadow: var(--cyan-inset);
+      border-radius: var(--rounded-lg);
+      margin-top: var(--space-md);
+    }
+    body.is-edit-mode .edit-toolbar {
+      display: flex;
+    }
+    .edit-status {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-right: auto;
+    }
+
+    /* Live editable states */
+    body.is-edit-mode [data-editable] {
+      outline: 1px dashed color-mix(in srgb, var(--secondary) 55%, transparent);
+      outline-offset: 4px;
+      border-radius: var(--rounded);
+      cursor: text;
+      transition: outline-color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+    }
+    body.is-edit-mode [data-editable]:hover {
+      background-color: color-mix(in srgb, var(--secondary) 6%, transparent);
+    }
+    body.is-edit-mode [data-editable]:focus {
+      outline: 2px solid var(--secondary);
+      background-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+    }
+
+    /* Shared typography & buttons */
+    .kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--secondary);
+      text-shadow: var(--glow-text);
+      display: inline-block;
+      margin-bottom: var(--space-sm);
+    }
+    .kicker.is-violet {
+      color: var(--primary);
+    }
+    h1, h2, h3 {
+      font-family: var(--font-headline);
+      margin: 0;
+      color: var(--on-surface);
+    }
+    h1 {
+      font-size: var(--display-size);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.07;
+    }
+    h2 {
+      font-size: var(--headline-size);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    h3 {
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    p {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 64ch;
+    }
+
+    .btn-neon {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      background: var(--surface-container);
+      color: var(--primary);
+      border: var(--neon-border-lit);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: box-shadow var(--dur-short) var(--ease-out),
+                  border-color var(--dur-short) var(--ease-out),
+                  text-shadow var(--dur-short) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+    .btn-neon:hover {
+      border-color: var(--primary);
+      box-shadow: var(--glow-primary);
+      text-shadow: var(--glow-text);
+    }
+    .btn-neon:active {
+      transform: translateY(1px);
+    }
+    .btn-neon.is-cyan {
+      color: var(--secondary);
+      border: var(--cyan-border-lit);
+    }
+    .btn-neon.is-cyan:hover {
+      border-color: var(--secondary);
+      box-shadow: var(--glow-secondary);
+      text-shadow: var(--glow-text);
+    }
+    .btn-ghost {
+      min-height: 40px;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .btn-ghost:hover {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* Neon panel primitive */
+    .neon-panel {
+      background: var(--surface-container);
+      border: var(--neon-border);
+      box-shadow: var(--neon-inset);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+    }
+    .neon-panel.is-cyan {
+      border: var(--cyan-border);
+      box-shadow: var(--cyan-inset);
+    }
+
+    /* Hero section */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: var(--space-2xl);
+      align-items: center;
+      padding: var(--space-xl) 0 var(--space-2xl);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .hero-copy {
+      display: grid;
+      gap: var(--space-lg);
+      align-content: start;
+    }
+    .hero-lede {
+      font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.22rem);
+      color: var(--on-surface);
+      max-width: 52ch;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+    .community-drawer {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: none;
+      gap: var(--space-sm);
+    }
+    .community-drawer.is-open {
+      display: grid;
+      border-color: color-mix(in srgb, var(--secondary) 45%, transparent);
+    }
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .drawer-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--secondary);
+    }
+    .drawer-code {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface);
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    /* Hero interactive prompt-to-cozy-app card */
+    .vibe-demo {
+      display: grid;
+      gap: var(--space-md);
+    }
+    .demo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: var(--space-sm);
+    }
+    .demo-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+    .wish-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .wish-chip {
+      min-height: 36px;
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      cursor: pointer;
+      transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .wish-chip:hover {
+      color: var(--on-surface);
+      border-color: var(--primary);
+    }
+    .wish-chip.is-selected {
+      color: var(--secondary);
+      border-color: color-mix(in srgb, var(--secondary) 60%, transparent);
+      box-shadow: var(--cyan-inset);
+    }
+    .prompt-bubble {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .prompt-tag {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .prompt-quote {
+      color: var(--on-surface);
+      font-size: 0.96rem;
+    }
+    .preview-result {
+      background: var(--surface-container-high);
+      border: var(--cyan-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .preview-result-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .preview-badge {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Section spacing & headers */
+    .section-block {
+      display: grid;
+      gap: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .section-head {
+      display: grid;
+      gap: var(--space-sm);
+      max-width: 68ch;
+    }
+
+    /* Section 1: Vibe coding explanation + LogicTrail & DataCamp preview cards */
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+      gap: var(--space-xl);
+    }
+    .guide-preview-card {
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+    }
+    .guide-preview-card:hover {
+      border-color: color-mix(in srgb, var(--primary) 60%, transparent);
+      box-shadow: var(--glow-primary);
+    }
+    .guide-preview-card.is-cyan:hover {
+      border-color: color-mix(in srgb, var(--secondary) 60%, transparent);
+      box-shadow: var(--glow-secondary);
+    }
+    .browser-bar {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .browser-dots {
+      display: inline-flex;
+      gap: var(--space-xs);
+    }
+    .browser-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--outline);
+    }
+    .browser-dot.is-violet { background: var(--primary); }
+    .browser-dot.is-cyan { background: var(--secondary); }
+    .browser-url {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .guide-mockup {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .guide-source-tag {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+    .guide-preview-card.is-cyan .guide-source-tag {
+      color: var(--secondary);
+    }
+    .takeaway-list {
+      margin: 0;
+      padding-left: var(--space-lg);
+      display: grid;
+      gap: var(--space-xs);
+      color: var(--on-surface-variant);
+      font-size: 0.95rem;
+    }
+    .takeaway-list li strong {
+      color: var(--on-surface);
+      font-weight: 500;
+    }
+    .guide-card-foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--outline-variant);
+    }
+    .guide-detail-note {
+      display: none;
+      background: var(--background);
+      border-left: 2px solid var(--primary);
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.92rem;
+      color: var(--on-surface);
+    }
+    .guide-preview-card.is-cyan .guide-detail-note {
+      border-left-color: var(--secondary);
+    }
+    .guide-detail-note.is-open {
+      display: block;
+    }
+
+    /* Section 2: Scrollytelling — Bring It To Your City (PIN CORE preserved) */
+    .scrolly {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .scrolly-graphic {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      margin: 0;
+    }
+    .steps {
+      padding: 18vh 0;
+      display: grid;
+      gap: var(--space-xl);
+    }
+    .step {
+      min-height: 62vh;
+      display: grid;
+      align-content: center;
+    }
+    .step-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+      opacity: 0.45;
+      transform: translateY(8px);
+      transition: opacity var(--dur-long) var(--ease-out),
+                  transform var(--dur-long) var(--ease-out),
+                  border-color var(--dur-long) var(--ease-out),
+                  box-shadow var(--dur-long) var(--ease-out);
+    }
+    .step.is-active .step-card {
+      opacity: 1;
+      transform: none;
+      background: var(--surface-container);
+      border: var(--neon-border-lit);
+      box-shadow: var(--glow-primary);
+    }
+    .step-idx {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--secondary);
+    }
+    .step-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+    .step-chip {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      color: var(--on-surface-variant);
+      background: var(--background);
+    }
+
+    /* Sticky Blueprint Visual Container */
+    .blueprint-frame {
+      width: 100%;
+      background: var(--surface-container);
+      border: var(--cyan-border);
+      box-shadow: var(--cyan-inset);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+      min-height: 440px;
+    }
+    .blueprint-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: var(--space-sm);
+    }
+    .blueprint-stage-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--secondary);
+      text-shadow: var(--glow-text);
+    }
+    .blueprint-progress {
+      display: flex;
+      gap: var(--space-xs);
+    }
+    .progress-seg {
+      width: 28px;
+      height: 6px;
+      border-radius: var(--rounded);
+      background: var(--outline-variant);
+      transition: background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+    }
+    .progress-seg.is-lit {
+      background: var(--primary);
+      box-shadow: var(--glow-primary);
+    }
+    .progress-seg.is-current {
+      background: var(--secondary);
+      box-shadow: var(--glow-secondary);
+    }
+
+    .blueprint-svg-wrap {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+    }
+    .blueprint-svg {
+      width: 100%;
+      height: auto;
+      max-height: 260px;
+    }
+    .bp-layer {
+      opacity: 0.16;
+      transition: opacity var(--dur-long) var(--ease-out), filter var(--dur-long) var(--ease-out);
+    }
+    .bp-layer.is-active {
+      opacity: 1;
+    }
+    .bp-layer.is-past {
+      opacity: 0.45;
+    }
+    .blueprint-caption {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .blueprint-caption-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      color: var(--on-surface);
+      font-size: 1.05rem;
+    }
+
+    /* Interactive Welcome Slides & Starter Kit Preview Panel */
+    .kit-preview-bar {
+      display: grid;
+      gap: var(--space-md);
+    }
+    .kit-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .kit-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .kit-tab {
+      min-height: 40px;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      cursor: pointer;
+      transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .kit-tab.is-active {
+      color: var(--primary);
+      border-color: color-mix(in srgb, var(--primary) 60%, transparent);
+      box-shadow: var(--neon-inset);
+    }
+    .kit-slide-stage {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    /* Section 3: Global Chapters Radar (Berlin Hub - 49 members) */
+    .radar-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+      gap: var(--space-xl);
+      align-items: stretch;
+    }
+    .radar-canvas-panel {
+      display: grid;
+      gap: var(--space-md);
+    }
+    .radar-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .radar-map-box {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      min-height: 380px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+    .radar-svg {
+      width: 100%;
+      height: 380px;
+      display: block;
+    }
+    .radar-country {
+      fill: var(--surface-container);
+      stroke: var(--outline-variant);
+      stroke-width: 0.7;
+    }
+    .radar-sphere {
+      fill: var(--background);
+      stroke: var(--outline-variant);
+      stroke-width: 1;
+    }
+    .radar-graticule {
+      fill: none;
+      stroke: color-mix(in srgb, var(--outline-variant) 55%, transparent);
+      stroke-width: 0.5;
+      stroke-dasharray: 2 3;
+    }
+    .radar-ring {
+      fill: none;
+      stroke: color-mix(in srgb, var(--secondary) 38%, transparent);
+      stroke-width: 1;
+    }
+    .radar-ring.is-outer {
+      stroke: color-mix(in srgb, var(--primary) 30%, transparent);
+      stroke-dasharray: 4 4;
+    }
+    .radar-ping-dot {
+      fill: var(--secondary);
+    }
+    .radar-candidate-dot {
+      fill: var(--primary);
+    }
+    .radar-label-text {
+      font-family: var(--font-label);
+      font-size: 11px;
+      fill: var(--on-surface);
+      letter-spacing: 0.06em;
+    }
+    .radar-attrib {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .radar-sidebar {
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+    }
+    .metric-tile {
+      background: var(--surface-container-low);
+      border: var(--neon-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .metric-tile.is-cyan {
+      border: var(--cyan-border);
+    }
+    .metric-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+    .metric-val {
+      font-family: var(--font-headline);
+      font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.35rem);
+      font-weight: 700;
+      color: var(--primary);
+      text-shadow: var(--glow-text);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+    .metric-tile.is-cyan .metric-val {
+      color: var(--secondary);
+    }
+    .hub-detail-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .hub-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .hub-badge {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--secondary);
+      border: var(--cyan-border);
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded);
+    }
+
+    /* Footer & Closing band */
+    .closing-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .footer-meta {
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--outline-variant);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-md);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* In-flow subtle fade reveal */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--dur-long) var(--ease-out), transform var(--dur-long) var(--ease-out);
+    }
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 860px) {
+      .hero,
+      .scrolly,
+      .radar-layout,
+      .closing-band {
+        grid-template-columns: 1fr;
+      }
+      .scrolly-graphic {
+        height: auto;
+        min-height: 360px;
+        top: var(--space-sm);
+        z-index: 2;
+      }
+      .steps {
+        padding: var(--space-lg) 0;
+      }
+      .step {
+        min-height: 44vh;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        padding: var(--space-md);
+        gap: var(--space-2xl);
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .radar-svg {
+        height: 300px;
+      }
+      .radar-map-box {
+        min-height: 300px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal-item {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Top Header (static) -->
+    <header>
+      <div class="topbar">
+        <div class="brand-group">
+          <span class="brand-home">
+            <img class="brand-logo" src="assets/logo.png" width="40" height="40" alt="Women Vibe Coders logo: a coffee cup with a prompt chevron">
+            <span class="brand-title" data-editable="brandTitle">Women Vibe Coders</span>
+          </span>
+          <nav class="nav-links" aria-label="Page sections">
+            <a class="nav-anchor" href="#what-is-vibe-coding">What It Is</a>
+            <a class="nav-anchor" href="#bring-to-your-city">Host Guide</a>
+            <a class="nav-anchor" href="#global-radar">Global Radar</a>
+          </nav>
+        </div>
+
+        <div class="mode-controls">
+          <div class="mode-switch" role="group" aria-label="Display mode toggle">
+            <button type="button" class="mode-btn is-active" id="btn-mode-preview" data-mode="preview" onclick="setEditorMode('preview')">
+              <i data-lucide="eye" width="15" height="15" aria-hidden="true"></i>
+              <span>Preview</span>
+            </button>
+            <button type="button" class="mode-btn" id="btn-mode-edit" data-mode="edit" onclick="setEditorMode('edit')">
+              <i data-lucide="pencil" width="15" height="15" aria-hidden="true"></i>
+              <span>Edit Mode</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="edit-toolbar" id="edit-toolbar" aria-live="polite">
+        <span class="edit-status" id="edit-status-msg">Edit Mode active — click any outlined text below to customize copy live.</span>
+        <button type="button" class="btn-ghost" onclick="exportPageCopy()">
+          <i data-lucide="download" width="14" height="14" aria-hidden="true"></i>
+          <span>Export Copy</span>
+        </button>
+        <button type="button" class="btn-ghost" id="btn-reset-copy" onclick="resetEditableCopy(this)">
+          <i data-lucide="rotate-ccw" width="14" height="14" aria-hidden="true"></i>
+          <span>Reset Defaults</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <div>
+          <span class="kicker" data-editable="heroKicker">no registration, no fee, we just want to create</span>
+          <h1 id="hero-heading" data-editable="heroTitle">A Supportive Space for Women to Start Building with AI</h1>
+        </div>
+
+        <p class="hero-lede" data-editable="heroSubtitle">
+          We started out as a group of women of various backgrounds craving for a cozy community to build and learn together, join us if that is you as well:
+        </p>
+
+        <div class="cta-row">
+          <button type="button" class="btn-neon" onclick="toggleCommunityDrawer('luma')">
+            <i data-lucide="calendar-heart" width="16" height="16" aria-hidden="true"></i>
+            <span>Luma Community</span>
+          </button>
+          <button type="button" class="btn-neon is-cyan" onclick="toggleCommunityDrawer('discord')">
+            <i data-lucide="message-circle-heart" width="16" height="16" aria-hidden="true"></i>
+            <span>Join Discord</span>
+          </button>
+        </div>
+
+        <div class="community-drawer" id="community-drawer" aria-live="polite">
+          <div class="drawer-header">
+            <span class="drawer-title" id="drawer-title">Community Space</span>
+            <button type="button" class="btn-ghost" onclick="closeCommunityDrawer()" aria-label="Close community details">Close</button>
+          </div>
+          <p id="drawer-desc"></p>
+          <div class="drawer-code">
+            <span id="drawer-handle"></span>
+            <button type="button" class="btn-ghost" id="drawer-copy-btn" onclick="copyCommunityHandle()">
+              <i data-lucide="copy" width="14" height="14" aria-hidden="true"></i>
+              <span>Copy Handle</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cozy Interactive Vibe Coding Preview -->
+      <aside class="neon-panel vibe-demo" aria-label="See how a plain-language wish becomes a small app">
+        <div class="demo-header">
+          <span class="demo-label">How a session feels</span>
+          <span class="step-chip">Zero syntax needed</span>
+        </div>
+
+        <div class="wish-chips" role="group" aria-label="Choose a beginner idea">
+          <button type="button" class="wish-chip is-selected" data-wish="0" onclick="selectWish(0)">School Lunch Picker</button>
+          <button type="button" class="wish-chip" data-wish="1" onclick="selectWish(1)">Quiet Reading Log</button>
+          <button type="button" class="wish-chip" data-wish="2" onclick="selectWish(2)">Nap &amp; Bottle Notes</button>
+        </div>
+
+        <div class="prompt-bubble">
+          <span class="prompt-tag">1. You type in everyday words</span>
+          <p class="prompt-quote" id="demo-prompt"></p>
+        </div>
+
+        <div class="preview-result">
+          <div class="preview-result-top">
+            <span class="preview-badge">2. AI shapes your working draft</span>
+            <span class="step-chip" id="demo-time">Built in ~18 mins</span>
+          </div>
+          <h3 id="demo-app-title"></h3>
+          <p id="demo-app-desc"></p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Section 1: What Is Vibe Coding + LogicTrail & DataCamp Visual Previews -->
+    <section class="section-block" id="what-is-vibe-coding" aria-labelledby="vibe-heading">
+      <div class="section-head reveal-item">
+        <span class="kicker is-violet" data-editable="vibeKicker">Gentle Foundations</span>
+        <h2 id="vibe-heading" data-editable="vibeHeading">What is vibe coding, really?</h2>
+        <p data-editable="vibeIntro">
+          You don’t need a computer science degree or memorized commands. Coined by Andrej Karpathy in 2025, vibe coding simply means describing a tool in plain language for AI to build.
+        </p>
+      </div>
+
+      <div class="guides-grid">
+        <!-- LogicTrail Visual Preview Card -->
+        <article class="neon-panel guide-preview-card reveal-item">
+          <div class="browser-bar" aria-label="Guide preview source">
+            <div class="browser-dots" aria-hidden="true">
+              <span class="browser-dot is-violet"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+            </div>
+            <span class="browser-url">logictrail.app/guides/vibe-coding-for-beginners#what-is-vibe-coding</span>
+          </div>
+
+          <div class="guide-mockup">
+            <span class="guide-source-tag">LogicTrail Beginner Guide</span>
+            <h3 data-editable="ltTitle">Vibe Coding for Beginners: Start With What You Feel</h3>
+            <p data-editable="ltSummary">
+              A warm primer explaining how natural-language prompts replace intimidating setup steps, letting newcomers focus on the problem they care about solving.
+            </p>
+            <ul class="takeaway-list">
+              <li><strong>Plain-English intent:</strong> Ask for a layout, color, or button the way you’d explain it to a friend.</li>
+              <li><strong>Tiny loops:</strong> Change one detail at a time, test it, and keep what feels effortless.</li>
+              <li><strong>No blank-page fear:</strong> Start from a working sketch in minutes instead of staring at empty files.</li>
+            </ul>
+          </div>
+
+          <div class="guide-detail-note" id="note-lt">
+            LogicTrail highlights that beginners succeed fastest when they describe the user experience first—who it’s for and how it should feel—before worrying about how anything runs underneath.
+          </div>
+
+          <div class="guide-card-foot">
+            <span class="step-chip">Section: #what-is-vibe-coding</span>
+            <button type="button" class="btn-ghost" onclick="toggleGuideNote('lt', this)">
+              <i data-lucide="book-open" width="14" height="14" aria-hidden="true"></i>
+              <span>Read Key Note</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- DataCamp Visual Preview Card -->
+        <article class="neon-panel is-cyan guide-preview-card is-cyan reveal-item">
+          <div class="browser-bar" aria-label="Guide preview source">
+            <div class="browser-dots" aria-hidden="true">
+              <span class="browser-dot is-cyan"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+            </div>
+            <span class="browser-url">datacamp.com/blog/vibe-coding-guide-for-beginners</span>
+          </div>
+
+          <div class="guide-mockup">
+            <span class="guide-source-tag">DataCamp Beginner Roadmap</span>
+            <h3 data-editable="dcTitle">Vibe Coding Guide for Beginners: Step-by-Step Workflow</h3>
+            <p data-editable="dcSummary">
+              A clear walkthrough showing how first-time creators go from a rough afternoon idea to a shareable little web tool through friendly back-and-forth prompts.
+            </p>
+            <ul class="takeaway-list">
+              <li><strong>Describe the goal:</strong> Share one clear sentence about what your mini-app should do.</li>
+              <li><strong>Look &amp; nudge:</strong> Click around your preview and ask AI to polish spacing, tone, or behavior.</li>
+              <li><strong>Save &amp; celebrate:</strong> Keep your project small enough to finish in a single cozy sitting.</li>
+            </ul>
+          </div>
+
+          <div class="guide-detail-note" id="note-dc">
+            DataCamp’s beginner guide breaks the process into calm, repeatable steps: pick a bite-sized project, ask for a working preview early, and treat error messages as simple clues to paste back to your AI partner.
+          </div>
+
+          <div class="guide-card-foot">
+            <span class="step-chip">Guide: Beginner Workflow</span>
+            <button type="button" class="btn-ghost" onclick="toggleGuideNote('dc', this)">
+              <i data-lucide="sparkles" width="14" height="14" aria-hidden="true"></i>
+              <span>Read Key Note</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: Bring It To Your City — 4-Step Scrollytelling Host Guide -->
+    <section class="section-block" id="bring-to-your-city" aria-labelledby="host-heading">
+      <div class="section-head reveal-item">
+        <span class="kicker" data-editable="hostKicker">Bring It To Your City</span>
+        <h2 id="host-heading" data-editable="hostHeading">Host a cozy in-person gathering in 4 simple steps</h2>
+        <p data-editable="hostIntro">
+          You don’t need a stage, sponsors, or technical credentials to start a local circle. Our goal is to encourage women to start building together with as little pressure as possible, so we prepared some steps and materials for you! Scroll through four easy steps to learn how you can easily build a local women builder group!
+        </p>
+      </div>
+
+      <div class="scrolly">
+        <div class="steps" id="steps"></div>
+
+        <figure class="scrolly-graphic" aria-label="Interactive host blueprint evolving across the 4 steps">
+          <div class="blueprint-frame" id="graphic">
+            <div class="blueprint-top">
+              <span class="blueprint-stage-label" id="bp-stage-label">Step 01 · Cozy Room</span>
+              <div class="blueprint-progress" aria-hidden="true">
+                <span class="progress-seg is-current" id="seg-0"></span>
+                <span class="progress-seg" id="seg-1"></span>
+                <span class="progress-seg" id="seg-2"></span>
+                <span class="progress-seg" id="seg-3"></span>
+              </div>
+            </div>
+
+            <div class="blueprint-svg-wrap">
+              <svg class="blueprint-svg" viewBox="0 0 460 250" role="img" aria-label="Host meetup blueprint diagram">
+                <defs>
+                  <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Base room grid -->
+                <rect x="14" y="14" width="432" height="222" rx="10" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.2" />
+
+                <!-- Layer 0: Café / Library room, Wi-Fi & Power outlets -->
+                <g class="bp-layer is-active" id="bp-layer-0">
+                  <rect x="34" y="34" width="164" height="84" rx="8" fill="var(--surface-container)" stroke="var(--secondary)" stroke-width="1.5" />
+                  <text x="50" y="60" fill="var(--secondary)" font-family="Space Mono, monospace" font-size="11" letter-spacing="1">CAFE / LIBRARY ROOM</text>
+                  <text x="50" y="82" fill="var(--on-surface)" font-family="Inter, sans-serif" font-size="12">Discussion-friendly</text>
+                  <text x="50" y="100" fill="var(--on-surface-variant)" font-family="Space Mono, monospace" font-size="10">WI-FI + POWER OUTLETS</text>
+                  <!-- Wi-Fi arcs -->
+                  <path d="M168 58 A16 16 0 0 1 184 58" fill="none" stroke="var(--secondary)" stroke-width="1.6" />
+                  <path d="M172 64 A10 10 0 0 1 180 64" fill="none" stroke="var(--secondary)" stroke-width="1.6" />
+                  <circle cx="176" cy="70" r="2.2" fill="var(--secondary)" />
+                </g>
+
+                <!-- Layer 1: 2-hour Luma table capped at ~10 guests -->
+                <g class="bp-layer" id="bp-layer-1">
+                  <circle cx="328" cy="126" r="52" fill="var(--surface-container)" stroke="var(--primary)" stroke-width="1.6" filter="url(#neonGlow)" />
+                  <text x="328" y="121" text-anchor="middle" fill="var(--primary)" font-family="Sora, sans-serif" font-size="13" font-weight="700">~10 GUESTS</text>
+                  <text x="328" y="139" text-anchor="middle" fill="var(--on-surface-variant)" font-family="Space Mono, monospace" font-size="10">2-HR LUMA CAP</text>
+                  <!-- 10 cozy seat nodes around the table -->
+                  <circle cx="328" cy="64" r="5" fill="var(--secondary)" />
+                  <circle cx="364" cy="76" r="5" fill="var(--primary)" />
+                  <circle cx="387" cy="107" r="5" fill="var(--secondary)" />
+                  <circle cx="387" cy="145" r="5" fill="var(--primary)" />
+                  <circle cx="364" cy="176" r="5" fill="var(--secondary)" />
+                  <circle cx="328" cy="188" r="5" fill="var(--primary)" />
+                  <circle cx="292" cy="176" r="5" fill="var(--secondary)" />
+                  <circle cx="269" cy="145" r="5" fill="var(--primary)" />
+                  <circle cx="269" cy="107" r="5" fill="var(--secondary)" />
+                  <circle cx="292" cy="76" r="5" fill="var(--primary)" />
+                </g>
+
+                <!-- Layer 2: Welcome Slides & Starter Kits -->
+                <g class="bp-layer" id="bp-layer-2">
+                  <rect x="34" y="134" width="164" height="82" rx="8" fill="var(--surface-container)" stroke="var(--primary)" stroke-width="1.5" />
+                  <text x="50" y="158" fill="var(--primary)" font-family="Space Mono, monospace" font-size="11" letter-spacing="1">HOST STARTER KIT</text>
+                  <rect x="50" y="170" width="58" height="32" rx="4" fill="var(--background)" stroke="var(--secondary)" stroke-width="1.2" />
+                  <text x="79" y="190" text-anchor="middle" fill="var(--on-surface)" font-family="Space Mono, monospace" font-size="9">SLIDES</text>
+                  <rect x="118" y="170" width="64" height="32" rx="4" fill="var(--background)" stroke="var(--primary)" stroke-width="1.2" />
+                  <text x="150" y="190" text-anchor="middle" fill="var(--on-surface)" font-family="Space Mono, monospace" font-size="9">PROMPTS</text>
+                </g>
+
+                <!-- Layer 3: Discord Recap -> LinkedIn Celebration -->
+                <g class="bp-layer" id="bp-layer-3">
+                  <path d="M198 175 C225 175, 225 126, 252 126" fill="none" stroke="var(--secondary)" stroke-width="1.6" stroke-dasharray="4 3" />
+                  <rect x="218" y="24" width="212" height="32" rx="6" fill="var(--surface-container-high)" stroke="var(--secondary)" stroke-width="1.4" />
+                  <text x="324" y="44" text-anchor="middle" fill="var(--secondary)" font-family="Space Mono, monospace" font-size="10">DISCORD RECAP -&gt; LINKEDIN WINS</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="blueprint-caption">
+              <span class="blueprint-caption-title" id="bp-cap-title"></span>
+              <p id="bp-cap-body"></p>
+            </div>
+          </div>
+        </figure>
+      </div>
+
+      <!-- Interactive Welcome Slides & Starter Kit Previewer -->
+      <div class="neon-panel kit-preview-bar reveal-item" aria-label="Host Welcome Slides and Starter Kits preview">
+        <div class="kit-controls">
+          <div>
+            <span class="kicker is-violet">Step 03 Preview</span>
+            <h3>Peek Inside the Welcome Slides &amp; Starter Kit</h3>
+          </div>
+          <div class="kit-tabs" role="tablist" aria-label="Starter Kit items">
+            <button type="button" class="kit-tab is-active" role="tab" aria-selected="true" onclick="selectKitTab(0, this)">Slide 1: Warm Welcome</button>
+            <button type="button" class="kit-tab" role="tab" aria-selected="false" onclick="selectKitTab(1, this)">Slide 2: First Prompt</button>
+            <button type="button" class="kit-tab" role="tab" aria-selected="false" onclick="selectKitTab(2, this)">Starter Kit Prompts</button>
+          </div>
+        </div>
+        <div class="kit-slide-stage" id="kit-slide-stage" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Section 3: Global Chapters Radar (Berlin — 49 members) -->
+    <section class="section-block" id="global-radar" aria-labelledby="radar-heading">
+      <div class="section-head reveal-item">
+        <span class="kicker" data-editable="radarKicker">Global Chapters Radar</span>
+        <h2 id="radar-heading" data-editable="radarHeading">Where are other women vibe coders right now?</h2>
+        <p data-editable="radarIntro">
+          Our community started with a small group of women in Berlin that enjoys building and supporting one another, and we want to spread the message to other places too!
+        </p>
+      </div>
+
+      <div class="radar-layout">
+        <div class="neon-panel is-cyan radar-canvas-panel reveal-item">
+          <div class="radar-toolbar">
+            <span class="step-chip">Active Signal: Berlin, Germany (52.52°N, 13.40°E)</span>
+            <div class="wish-chips" role="group" aria-label="Radar zoom view">
+              <button type="button" class="wish-chip is-selected" id="radar-btn-global" onclick="setRadarView('global')">Global Radar</button>
+              <button type="button" class="wish-chip" id="radar-btn-europe" onclick="setRadarView('europe')">Europe Focus</button>
+              <button type="button" class="wish-chip" id="radar-btn-next" onclick="toggleNextCityPin()">Preview Your City Next</button>
+            </div>
+          </div>
+
+          <div class="radar-map-box" id="radar-map-box">
+            <svg class="radar-svg" id="radar-svg" viewBox="0 0 720 380" role="img" aria-label="Vector world map highlighting Berlin active hub with 49 members"></svg>
+          </div>
+
+          <div class="radar-attrib">
+            Vector basemap: Natural Earth (public domain) · Radar centered on Berlin Hub
+          </div>
+        </div>
+
+        <aside class="radar-sidebar reveal-item">
+          <div class="metric-tile is-cyan">
+            <span class="metric-label">Active Chapter Hubs</span>
+            <span class="metric-val" data-editable="activeHubCount">1</span>
+            <p>Berlin, Germany — founding cozy chapter</p>
+          </div>
+
+          <div class="metric-tile">
+            <span class="metric-label">Berlin Hub Members</span>
+            <span class="metric-val" data-editable="berlinMembers">49</span>
+            <p>Women, moms &amp; first-time builders</p>
+          </div>
+
+          <div class="hub-detail-card">
+            <div class="hub-status-row">
+              <h3 data-editable="berlinHubTitle">Berlin Hub</h3>
+              <span class="hub-badge">Active Hub</span>
+            </div>
+            <p data-editable="berlinHubDesc">
+              We organize bi-weekly 2-hour café sessions where we share what we built, what tools we discovered, and how we feel in this new era of AI.
+            </p>
+            <span class="step-chip" id="next-city-status">Next hub pin: Ready for your city</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Closing Band & Footer -->
+    <section class="neon-panel closing-band reveal-item" aria-labelledby="closing-heading">
+      <div class="hero-copy">
+        <span class="kicker is-violet">Pull Up a Chair</span>
+        <h2 id="closing-heading" data-editable="closingTitle">Ready to build something small and yours?</h2>
+        <p data-editable="closingBody">
+          RSVP for an upcoming gathering in our Luma Community, or drop in to say hello on Discord—even if you haven’t written a single line before.
+        </p>
+      </div>
+      <div class="cta-row">
+        <button type="button" class="btn-neon" onclick="toggleCommunityDrawer('luma'); window.scrollTo({top: 0, behavior: 'smooth'});">
+          <i data-lucide="calendar-heart" width="16" height="16" aria-hidden="true"></i>
+          <span>Luma Community</span>
+        </button>
+        <button type="button" class="btn-neon is-cyan" onclick="toggleCommunityDrawer('discord'); window.scrollTo({top: 0, behavior: 'smooth'});">
+          <i data-lucide="message-circle-heart" width="16" height="16" aria-hidden="true"></i>
+          <span>Join Discord</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer-meta">
+      <span>Women Vibe Coders — Cozy AI building circles for women, moms &amp; beginners.</span>
+      <span>Guide previews adapted from LogicTrail &amp; DataCamp beginner guides · Map geometry: Natural Earth.</span>
+    </footer>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    // ── Data models (backtick literals for apostrophe safety) ─────────────────
+    const WISHES = [
+      {
+        prompt: `"Make me a calm, mobile-friendly checklist where my kids can tap three breakfast or school lunch ideas for tomorrow morning."`,
+        title: `Morning Lunchbox Helper`,
+        desc: `A clean two-tap picker with gentle colors, saved favorites, and zero clutter—ready for busy weekday mornings.`,
+        time: `Built in ~18 mins`
+      },
+      {
+        prompt: `"Build a cozy reading tracker that lets me log a few pages before bed and shows a soft progress bar for my five favorite books."`,
+        title: `Bedside Book Nook`,
+        desc: `A distraction-free shelf with one-tap page updates and warm notes, made just for quiet evening wind-downs.`,
+        time: `Built in ~15 mins`
+      },
+      {
+        prompt: `"Create a simple one-screen log for newborn feeds and naps with giant buttons I can tap one-handed at 3 a.m."`,
+        title: `One-Handed Night Log`,
+        desc: `High-contrast dark mode buttons, instant timestamps, and a reassuring summary for the morning handoff.`,
+        time: `Built in ~20 mins`
+      }
+    ];
+
+    const STEPS = [
+      {
+        label: `Step 01 · Pick a Cozy Room`,
+        title: `Find a welcoming café or library room`,
+        body: `Choose a quiet café corner or a reservable library room that allows relaxed discussion, with steady Wi-Fi and easy access to power outlets.`,
+        chips: [`Discussion-friendly`, `Steady Wi-Fi`, `Power outlets`]
+      },
+      {
+        label: `Step 02 · Publish on Luma`,
+        title: `Post a Luma page`,
+        body: `Publish a event page under our Luma Community. We recommend starting out with a small group of around 10 guests meeting for 2 hours. In our experience, keeping it small makes it easier to connect and support each other.`,
+        chips: [`Luma Community`, `2-hour session`, `~10 guest cap`]
+      },
+      {
+        label: `Step 03 · Grab Your Kit`,
+        title: `Open the Welcome Slides & Starter Kits`,
+        body: `Not sure how to create an agenda and slides for the gathering? Don't worry, we prepared Welcome Slides and beginner Starter Kits so you can start a community as easy as possible!`,
+        chips: [`Welcome Slides`, `Starter Kits`, `Zero prep stress`]
+      },
+      {
+        label: `Step 04 · Share the Glow`,
+        title: `Share the recap with us on Discord & celebrate on LinkedIn`,
+        body: `Share a short recap and tiny project snapshots in our Discord channel so we can celebrate your group’s wins on LinkedIn — with permission of the participants, of course!`,
+        chips: [`Discord recap`, `Permission-first`, `LinkedIn celebration`]
+      }
+    ];
+
+    const KIT_SLIDES = [
+      {
+        badge: `Slide 01 of 03 · Opening 10 Minutes`,
+        title: `Welcome! Nobody here is expected to know code.`,
+        body: `Grab your tea or coffee, introduce yourself and one tiny thing you wish existed in your daily life, and open any AI chat window you’re comfortable using.`
+      },
+      {
+        badge: `Slide 02 of 03 · Guided First Prompt`,
+        title: `Start with a two-sentence wish, not a blueprint.`,
+        body: `Tell your AI partner who the tiny app is for and one thing it should do on screen. Ask it to keep everything simple and visual so you can test it right away.`
+      },
+      {
+        badge: `Starter Kit · 3 Ready-to-Paste Prompts`,
+        title: `Gentle prompts for moms & first-time builders`,
+        body: `Includes: (1) "Explain this in plain English before changing anything", (2) "Make the buttons larger and calmer to read", and (3) "Walk me through the simplest way to share this with a friend."`
+      }
+    ];
+
+    const COMMUNITY_INFO = {
+      luma: {
+        title: `Women Vibe Coders · Luma Community`,
+        desc: `Browse upcoming 2-hour cozy circles, RSVP for an open seat in Berlin, or list your own city’s gathering under our Luma Community calendar.`,
+        handle: `Luma Community: lu.ma/women-vibe-coders`
+      },
+      discord: {
+        title: `Women Vibe Coders · Discord Space`,
+        desc: `A friendly, moderated hangout for asking beginner questions without judgment, sharing tiny project screenshots, and posting host recaps.`,
+        handle: `Discord Invite: discord.gg/women-vibe-coders`
+      }
+    };
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let currentMode = 'preview';
+    let currentDrawer = null;
+    let radarView = 'global';
+    let showNextCity = false;
+    let cachedTopo = null;
+    let defaultEditableMap = {};
+
+    // ── Live Edit Mode & Persistence ──────────────────────────────────────────
+    function captureDefaults() {
+      document.querySelectorAll('[data-editable]').forEach(function(el) {
+        const key = el.getAttribute('data-editable');
+        if (key) defaultEditableMap[key] = el.textContent.trim();
+      });
+    }
+
+    function setEditorMode(mode) {
+      currentMode = mode === 'edit' ? 'edit' : 'preview';
+      const isEdit = currentMode === 'edit';
+      document.body.classList.toggle('is-edit-mode', isEdit);
+
+      const prevBtn = document.getElementById('btn-mode-preview');
+      const editBtn = document.getElementById('btn-mode-edit');
+      if (prevBtn) prevBtn.classList.toggle('is-active', !isEdit);
+      if (editBtn) editBtn.classList.toggle('is-active', isEdit);
+
+      document.querySelectorAll('[data-editable]').forEach(function(el) {
+        el.setAttribute('contenteditable', isEdit ? 'true' : 'false');
+      });
+      persistState();
+    }
+
+    function collectEditableState() {
+      const edits = {};
+      document.querySelectorAll('[data-editable]').forEach(function(el) {
+        const key = el.getAttribute('data-editable');
+        if (key) edits[key] = el.textContent.trim();
+      });
+      return edits;
+    }
+
+    function applyEditableState(edits) {
+      if (!edits || typeof edits !== 'object') return;
+      document.querySelectorAll('[data-editable]').forEach(function(el) {
+        const key = el.getAttribute('data-editable');
+        if (key && typeof edits[key] === 'string' && edits[key].length > 0) {
+          el.textContent = edits[key];
+        }
+      });
+    }
+
+    async function persistState() {
+      if (!window.notebookAppApi || !window.notebookAppApi.setAppState) return;
+      try {
+        await window.notebookAppApi.setAppState({
+          mode: currentMode,
+          edits: collectEditableState(),
+          radarView: radarView,
+          showNextCity: showNextCity
+        });
+      } catch (err) {
+        // Ignore persistence errors in standalone preview
+      }
+    }
+
+    function resetEditableCopy(btn) {
+      if (btn && btn.dataset.armed !== 'true') {
+        btn.dataset.armed = 'true';
+        const span = btn.querySelector('span');
+        if (span) span.textContent = `Click again to reset`;
+        setTimeout(function() {
+          if (btn.dataset.armed === 'true') {
+            btn.dataset.armed = 'false';
+            if (span) span.textContent = `Reset Defaults`;
+          }
+        }, 3500);
+        return;
+      }
+      if (btn) {
+        btn.dataset.armed = 'false';
+        const span = btn.querySelector('span');
+        if (span) span.textContent = `Reset Defaults`;
+      }
+      applyEditableState(defaultEditableMap);
+      const status = document.getElementById('edit-status-msg');
+      if (status) status.textContent = `Defaults restored — all copy reset.`;
+      persistState();
+    }
+
+    function exportPageCopy() {
+      const edits = collectEditableState();
+      const lines = Object.keys(edits).map(function(k) {
+        return `${k}: ${edits[k]}`;
+      });
+      const content = `Women Vibe Coders — Edited Copy\n===============================\n\n` + lines.join(`\n\n`);
+      if (window.notebookAppApi && window.notebookAppApi.triggerFileDownload) {
+        window.notebookAppApi.triggerFileDownload({
+          content: content,
+          contentType: 'text/plain',
+          encoding: 'UTF-8',
+          filename: 'women-vibe-coders-copy.txt'
+        });
+      } else {
+        const status = document.getElementById('edit-status-msg');
+        if (status) status.textContent = `Copy snapshot saved to session state.`;
+      }
+    }
+
+    // ── Hero Community Drawer & Interactive Demo ──────────────────────────────
+    function toggleCommunityDrawer(kind) {
+      const drawer = document.getElementById('community-drawer');
+      const titleEl = document.getElementById('drawer-title');
+      const descEl = document.getElementById('drawer-desc');
+      const handleEl = document.getElementById('drawer-handle');
+      const copyBtn = document.getElementById('drawer-copy-btn');
+      if (!drawer || !COMMUNITY_INFO[kind]) return;
+
+      if (currentDrawer === kind && drawer.classList.contains('is-open')) {
+        closeCommunityDrawer();
+        return;
+      }
+      currentDrawer = kind;
+      const info = COMMUNITY_INFO[kind];
+      if (titleEl) titleEl.textContent = info.title;
+      if (descEl) descEl.textContent = info.desc;
+      if (handleEl) handleEl.textContent = info.handle;
+      if (copyBtn) {
+        const sp = copyBtn.querySelector('span');
+        if (sp) sp.textContent = `Copy Handle`;
+      }
+      drawer.classList.add('is-open');
+    }
+
+    function closeCommunityDrawer() {
+      const drawer = document.getElementById('community-drawer');
+      if (drawer) drawer.classList.remove('is-open');
+      currentDrawer = null;
+    }
+
+    function copyCommunityHandle() {
+      const handleEl = document.getElementById('drawer-handle');
+      const copyBtn = document.getElementById('drawer-copy-btn');
+      if (!handleEl || !copyBtn) return;
+      const text = handleEl.textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(function() {});
+      }
+      const sp = copyBtn.querySelector('span');
+      if (sp) sp.textContent = `Copied!`;
+    }
+
+    function selectWish(index) {
+      const wish = WISHES[index];
+      if (!wish) return;
+      document.querySelectorAll('.wish-chips [data-wish]').forEach(function(btn) {
+        btn.classList.toggle('is-selected', Number(btn.getAttribute('data-wish')) === index);
+      });
+      const p = document.getElementById('demo-prompt');
+      const t = document.getElementById('demo-app-title');
+      const d = document.getElementById('demo-app-desc');
+      const tm = document.getElementById('demo-time');
+      if (p) p.textContent = wish.prompt;
+      if (t) t.textContent = wish.title;
+      if (d) d.textContent = wish.desc;
+      if (tm) tm.textContent = wish.time;
+    }
+
+    function toggleGuideNote(key, btn) {
+      const note = document.getElementById('note-' + key);
+      if (!note) return;
+      const open = note.classList.toggle('is-open');
+      if (btn) {
+        const sp = btn.querySelector('span');
+        if (sp) sp.textContent = open ? `Hide Key Note` : `Read Key Note`;
+      }
+    }
+
+    function selectKitTab(index, btn) {
+      const slide = KIT_SLIDES[index];
+      const stage = document.getElementById('kit-slide-stage');
+      if (!slide || !stage) return;
+      document.querySelectorAll('.kit-tab').forEach(function(t) {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      if (btn) {
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+      }
+      stage.innerHTML =
+        `<span class="guide-source-tag">${slide.badge}</span>` +
+        `<h3>${slide.title}</h3>` +
+        `<p>${slide.body}</p>`;
+    }
+
+    // ── Scrollytelling Engine (Steps + Persistent Blueprint Graphic) ──────────
+    function buildSteps() {
+      const stepsEl = document.getElementById('steps');
+      if (!stepsEl) return;
+      STEPS.forEach(function(s, i) {
+        const chipsHtml = s.chips.map(function(c) {
+          return `<span class="step-chip">${c}</span>`;
+        }).join('');
+        stepsEl.insertAdjacentHTML(
+          'beforeend',
+          `<div class="step" data-step="${i}">` +
+            `<div class="step-card">` +
+              `<span class="step-idx">${s.label}</span>` +
+              `<h3 data-editable="hostStepTitle${i}">${s.title}</h3>` +
+              `<p data-editable="hostStepBody${i}">${s.body}</p>` +
+              `<div class="step-chip-row">${chipsHtml}</div>` +
+            `</div>` +
+          `</div>`
+        );
+      });
+    }
+
+    function renderGraphic(i) {
+      const s = STEPS[i];
+      if (!s) return;
+      const stageLabel = document.getElementById('bp-stage-label');
+      const capTitle = document.getElementById('bp-cap-title');
+      const capBody = document.getElementById('bp-cap-body');
+      if (stageLabel) stageLabel.textContent = s.label;
+      if (capTitle) capTitle.textContent = s.title;
+      if (capBody) capBody.textContent = s.body;
+
+      for (let idx = 0; idx < STEPS.length; idx++) {
+        const seg = document.getElementById('seg-' + idx);
+        if (seg) {
+          seg.classList.toggle('is-current', idx === i);
+          seg.classList.toggle('is-lit', idx < i);
+        }
+        const layer = document.getElementById('bp-layer-' + idx);
+        if (layer) {
+          layer.classList.toggle('is-active', idx <= i);
+          layer.classList.toggle('is-past', idx < i);
+        }
+      }
+    }
+
+    function initScrolly() {
+      const nodes = document.querySelectorAll('.scrolly .step');
+      if (!nodes.length) return;
+      function activate(i) {
+        nodes.forEach(function(n) { n.classList.remove('is-active'); });
+        if (nodes[i]) nodes[i].classList.add('is-active');
+        renderGraphic(i);
+      }
+      renderGraphic(0);
+      activate(0);
+
+      if (window.scrollama) {
+        const sc = window.scrollama();
+        sc.setup({ step: '.scrolly .step', offset: 0.55 })
+          .onStepEnter(function(res) { activate(res.index); });
+        window.addEventListener('resize', sc.resize);
+      } else {
+        const io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) activate(Number(e.target.dataset.step));
+          });
+        }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
+        nodes.forEach(function(n) { io.observe(n); });
+      }
+    }
+
+    // ── Global Chapters Radar (D3 + Natural Earth TopoJSON) ───────────────────
+    function setRadarView(view) {
+      radarView = view === 'europe' ? 'europe' : 'global';
+      const gBtn = document.getElementById('radar-btn-global');
+      const eBtn = document.getElementById('radar-btn-europe');
+      if (gBtn) gBtn.classList.toggle('is-selected', radarView === 'global');
+      if (eBtn) eBtn.classList.toggle('is-selected', radarView === 'europe');
+      drawRadarMap();
+      persistState();
+    }
+
+    function toggleNextCityPin() {
+      showNextCity = !showNextCity;
+      const btn = document.getElementById('radar-btn-next');
+      const status = document.getElementById('next-city-status');
+      if (btn) btn.classList.toggle('is-selected', showNextCity);
+      if (status) {
+        status.textContent = showNextCity
+          ? `Previewing potential next city beacons alongside Berlin`
+          : `Next hub pin: Ready for your city`;
+      }
+      drawRadarMap();
+      persistState();
+    }
+
+    function drawRadarMap() {
+      const svgEl = document.getElementById('radar-svg');
+      if (!svgEl || !window.d3) return;
+
+      const d3 = window.d3;
+      const w = 720;
+      const h = 380;
+      const svg = d3.select(svgEl);
+      svg.selectAll('*').remove();
+
+      const projection = radarView === 'europe'
+        ? d3.geoMercator().center([13.4, 51.5]).scale(620).translate([w / 2, h / 2])
+        : d3.geoNaturalEarth1().scale(132).translate([w / 2, h / 2 + 12]);
+      const path = d3.geoPath(projection);
+
+      if (radarView === 'global') {
+        svg.append('path')
+          .datum({ type: 'Sphere' })
+          .attr('class', 'radar-sphere')
+          .attr('d', path);
+      }
+
+      svg.append('path')
+        .datum(d3.geoGraticule10())
+        .attr('class', 'radar-graticule')
+        .attr('d', path);
+
+      if (cachedTopo && window.topojson) {
+        const countries = window.topojson.feature(cachedTopo, cachedTopo.objects.countries);
+        svg.append('g')
+          .selectAll('path')
+          .data(countries.features)
+          .join('path')
+          .attr('class', 'radar-country')
+          .attr('d', path);
+      }
+
+      // Berlin active hub coordinates
+      const berlinCoords = [13.405, 52.52];
+      const pt = projection(berlinCoords);
+      if (pt) {
+        const g = svg.append('g').attr('transform', `translate(${pt[0]}, ${pt[1]})`);
+
+        // Radar rings centered on Berlin
+        g.append('circle').attr('class', 'radar-ring is-outer').attr('r', 52);
+        g.append('circle').attr('class', 'radar-ring').attr('r', 30);
+        g.append('circle').attr('class', 'radar-ring').attr('r', 14);
+        g.append('circle').attr('class', 'radar-ping-dot').attr('r', 5.5);
+
+        // Berlin readout label
+        const label = g.append('g').attr('transform', 'translate(14, -14)');
+        label.append('rect')
+          .attr('x', -4)
+          .attr('y', -14)
+          .attr('width', 152)
+          .attr('height', 24)
+          .attr('rx', 4)
+          .attr('fill', 'var(--surface-container-high)')
+          .attr('stroke', 'var(--secondary)')
+          .attr('stroke-width', 1);
+        label.append('text')
+          .attr('class', 'radar-label-text')
+          .attr('x', 4)
+          .attr('y', 2)
+          .text(`BERLIN · 49 MEMBERS`);
+      }
+
+      if (showNextCity) {
+        const candidates = [
+          { name: `YOUR CITY?`, coords: [-79.38, 43.65] },
+          { name: `YOUR CITY?`, coords: [-0.12, 51.50] },
+          { name: `YOUR CITY?`, coords: [139.69, 35.68] }
+        ];
+        candidates.forEach(function(c) {
+          const cpt = projection(c.coords);
+          if (!cpt) return;
+          const cg = svg.append('g').attr('transform', `translate(${cpt[0]}, ${cpt[1]})`);
+          cg.append('circle').attr('class', 'radar-ring is-outer').attr('r', 16);
+          cg.append('circle').attr('class', 'radar-candidate-dot').attr('r', 3.5);
+          cg.append('text')
+            .attr('class', 'radar-label-text')
+            .attr('x', 8)
+            .attr('y', 4)
+            .attr('opacity', 0.8)
+            .text(c.name);
+        });
+      }
+    }
+
+    function initRadarMap() {
+      drawRadarMap();
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json')
+        .then(function(r) { return r.json(); })
+        .then(function(topo) {
+          cachedTopo = topo;
+          drawRadarMap();
+        })
+        .catch(function() {
+          // Graceful fallback: sphere, graticule, and Berlin radar beacon remain visible
+        });
+    }
+
+    // ── In-flow reveal observer ───────────────────────────────────────────────
+    function initRevealObserver() {
+      const items = document.querySelectorAll('.reveal-item');
+      if (!items.length || !window.IntersectionObserver) {
+        items.forEach(function(el) { el.classList.add('is-visible'); });
+        return;
+      }
+      const io = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        });
+      }, { threshold: 0.1 });
+      items.forEach(function(el) { io.observe(el); });
+    }
+
+    // ── Boot sequence ─────────────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', async function() {
+      selectWish(0);
+      selectKitTab(0, document.querySelector('.kit-tab'));
+      buildSteps();
+      captureDefaults();
+      initScrolly();
+      initRevealObserver();
+      initRadarMap();
+
+      if (window.lucide && window.lucide.createIcons) {
+        window.lucide.createIcons();
+      }
+
+      document.querySelectorAll('[data-editable]').forEach(function(el) {
+        el.addEventListener('input', persistState);
+      });
+
+      if (window.notebookAppApi) {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved) {
+            if (saved.edits) applyEditableState(saved.edits);
+            if (saved.radarView) setRadarView(saved.radarView);
+            if (saved.showNextCity) {
+              showNextCity = true;
+              const btn = document.getElementById('radar-btn-next');
+              if (btn) btn.classList.add('is-selected');
+              drawRadarMap();
+            }
+            if (saved.mode) setEditorMode(saved.mode);
+          }
+        } catch (err) {
+          // Safe fallback when host shim has no stored state yet
+        }
+        window.notebookAppApi.notifyAppReady();
+      }
+    });
+  </script>
+</body>
+</html>

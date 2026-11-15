@@ -1,44 +1,51 @@
-# Project Memory & Context Log: Women Vibe Coding Platform
+# Project Memory — Women Vibe Coders
 
-## 1. Project Context & Vision
-- **Objective**: Create a community web platform for a **Women Vibe Coding group**.
-- **Core Inspiration**:
-  - **PyLadies Infrastructure**: Adopt PyLadies' proven global mentorship model (decentralized chapters, inclusive support network, regional event coordination, and welcoming onboarding).
-  - **Vibe Coding Aesthetic**: Incorporate modern, award-winning UI trends (dark slate canvas, Bento grid layouts, glassmorphism borders, and interactive prompt/code terminal widgets).
+The *why* behind the project: decisions, reasons and open questions. For brand and design rules see `CLAUDE.md`; for page details see `specs/`. Don't repeat those here.
 
 ---
 
-## 2. Source Grounding & Research Synthesis
-
-### 2.1 PyLadies Grounding (Source: PyLadies URL)
-- **Mission**: Empower women and non-binary developers to become leaders in technology.
-- **Structural Elements**:
-  - Global chapter directory with clear status indicators (`Active`, `Launching`).
-  - Chapter contact info & local community chat links (Slack/Discord).
-  - Central event calendar & annual celebration highlights.
-  - Open governance & welcoming Code of Conduct.
-
-### 2.2 Web Research Findings
-- **Bento Layout Patterns**: Modular grid organizing content into a 60/40 visual balance. High-priority cards (interactive terminals, live counts) get prominent space.
-- **Dark Mode Palette**: Deep Slate (`#0B0F19`) background paired with translucent navy cards (`#161F33`), Neon Purple (`#A855F7`), and Electric Teal (`#14F195`).
-- **Vibe Coding Identity**: Highlight real-time building, prompt engineering toolkits, member project showcases, and live interactive widgets.
+## 1. Who this is for
+- **Audience**: Women who want to make real tools with AI and have never coded (or haven't in years, or want to have a community).
+- **Feeling we're going for**: A warm drink at a café table with friends, not a hackathon. No jargon, no gatekeeping, no pressure to be "technical."
+- **Non-profit, volunteer-run.** Growth happens when members host their own small local meetups, not through a central team.
 
 ---
 
-## 3. Key Design & Feature Decisions
+## 2. Key decisions and why
 
-| Feature | User Requirement / Goal | Design Solution |
-| :--- | :--- | :--- |
-| **Chapter Radar** | See chapters & new events across locations | Interactive search map + filterable Event Radar |
-| **Editable Text** | Make text easily editable & displayable | Dual system: `contenteditable` visual switch + `content.json` store + Quick Content Drawer |
-| **Figma Integration**| Incorporate Figma into web platform | Figma Embed component (`<iframe>`) + 1:1 Design Token sync (`tokens.css`) |
-| **Modern Aesthetics**| Fun, award-winning vibe | Bento Grid layout, neon accents, dark mode, interactive Vibe Terminal |
+| Decision | Why |
+| :--- | :--- |
+| **One single-page site** (`index.html`) instead of a multi-page app | Fast to publish and easy for non-technical organizers to edit. The earlier 6-page plan (chapters, events, showcase, resources, about) was dropped as too much for launch. |
+| **Luma for events, Discord for community** | Free tools members already use. Luma handles RSVPs and caps; Discord holds peer support and wins. The site points to them and doesn't rebuild them. |
+| **Meetups capped at ~10 guests, 2 hours** | Small enough that everyone gets heard and helped; low effort for a first-time host. |
+| **Link out to beginner guides** (LogicTrail, DataCamp) instead of writing our own course | Good guides already exist; our value is the community around learning, not the content. |
+| **Removed the on-page Edit Mode** (2026-11-15) | Visitors don't need it, and it never saved anything. Copy changes are made in `index.html` and published with `/push`. Each text element keeps a `data-editable="key"` label so copy can be updated by name. |
+| **Hosted on GitHub Pages** | Free, no build step, updates on every push to `main`. |
+| **Logo cropped for web** (`assets/`) | The original PNG has lots of empty space and an AI-tool watermark in the corner. Web versions are cropped to the cup. Keep the original as the source file. |
+| **Dropped Figma embeds and the `content.json` content store** | Overkill for a one-page site run by volunteers. Revisit only if the site grows. |
 
 ---
 
-## 4. Change Log & History
-- **2026-11-14**: Initial vision defined; PyLadies structure analyzed.
-- **2026-11-14**: Conducted web research on Bento grids, dark mode tokens, and modern web UI trends.
-- **2026-11-14**: Defined 6-page site outline (`/`, `/chapters`, `/events`, `/showcase`, `/resources`, `/about`).
-- **2026-11-14**: Added Figma embed & direct inline editing (`contenteditable` + `content.json`) requirements.
-- **2026-11-14**: Generated developer documentation (`CLAUDE.md`, `spec/*`, `memory.md`, `build-steps.md`).
+## 3. Current state
+- **Live site**: https://gigi1111.github.io/women-vibe-coder-website/
+- **Repo**: `Gigi1111/women-vibe-coder-website` (public), branch `main`.
+- **Sections**: Hero → What is vibe coding (+ guide cards) → Host a meetup in 4 steps → Global radar map → Closing call to action.
+- **Chapters**: Berlin (active, 49 members).
+
+---
+
+## 4. Open questions / to do
+- [ ] **Luma and Discord buttons open a drawer but have no real invite links yet.** Add the actual Luma calendar URL and Discord invite.
+- [ ] Host starter kit (`women_vibe_coders_intro_deck.pptx`) is mentioned in the host guide but doesn't exist yet.
+- [ ] Custom domain (e.g. `womenvibecoders.org`)? If added, update the `og:url` / `og:image` tags in `index.html`.
+- [ ] Code of Conduct page: needed before promoting meetups widely.
+- [ ] `specs/site-spec.md` still calls the page `like.html`; `build-steps.md` describes the old plan. Both need refreshing.
+
+---
+
+## 5. Change log
+- **2026-11-14**: Initial vision, design research and docs written.
+- **2026-11-15**: Rebranded around women, moms and first-time builders; simplified to a single cozy landing page; new palette (obsidian, violet, peach, cyan).
+- **2026-11-15**: Added logo, browser icon and share preview. Renamed `landing.html` to `index.html`. Published on GitHub Pages. Added a `/push` skill (commit and push, only when `/push` is typed).
+- **2026-11-15**: Removed references to outside organizations from project docs.
+- **2026-11-15**: Applied the new site copy; removed the Preview/Edit Mode toggle.
