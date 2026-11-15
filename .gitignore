@@ -1,0 +1,35 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets / environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies & build output
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+.vite/
+.next/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Claude Code local (personal) settings
+.claude/settings.local.json
