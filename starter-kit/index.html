@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starter Kit · Women Vibe Coders</title>
+  <meta name="description" content="A gentle, step-by-step starter kit for complete beginners: how to use three free vibe coding resources, starter prompts, and safety basics.">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <meta property="og:title" content="Women Vibe Coders · Starter Kit">
+  <meta property="og:description" content="Your first steps into building with AI. No experience needed.">
+  <meta property="og:image" content="https://gigi1111.github.io/women-vibe-coder-website/assets/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090E;
+      --surface: #0F1421;
+      --surface-2: #151B2B;
+      --line: rgba(168, 85, 247, 0.22);
+      --line-soft: rgba(148, 163, 184, 0.16);
+      --violet: #A855F7;
+      --violet-soft: #C9A2FF;
+      --peach: #F5B48A;
+      --cyan: #06B6D4;
+      --cyan-soft: #67E8F9;
+      --text: #F8FAFC;
+      --muted: #A3AEC2;
+      --font-head: 'Sora', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Space Mono', ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.65 var(--font-body);
+    }
+    a { color: var(--cyan-soft); text-underline-offset: 3px; }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 32px 16px 72px; }
+    .topnav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 40px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font: 700 1rem var(--font-head); }
+    .brand img { width: 36px; height: 36px; border-radius: 9px; }
+    .pdf-btn {
+      font: 700 0.78rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--violet-soft); text-decoration: none; border: 1px solid var(--line);
+      padding: 8px 14px; border-radius: 10px; white-space: nowrap;
+    }
+
+    /* Cover */
+    .cover { padding: 8px 0 28px; border-bottom: 1px solid var(--line-soft); margin-bottom: 36px; }
+    .kicker { font: 700 0.78rem var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+    h1 { font: 800 clamp(2.2rem, 6vw, 3.4rem)/1.05 var(--font-head); letter-spacing: -0.03em; margin: 10px 0 14px; }
+    .lede { font-size: 1.15rem; color: var(--muted); max-width: 40em; margin: 0; }
+    .cover-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .pill { font: 0.8rem var(--font-mono); color: var(--text); background: rgba(168,85,247,0.12); border: 1px solid var(--line); padding: 4px 12px; border-radius: 999px; }
+
+    /* Contents */
+    .toc { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 14px; padding: 18px 22px; margin-bottom: 44px; }
+    .toc h2 { font-size: 1rem; margin: 0 0 8px; }
+    .toc ol { margin: 0; padding-left: 22px; columns: 2 240px; column-gap: 28px; }
+    .toc li { margin: 2px 0; break-inside: avoid; }
+
+    /* Sections */
+    section { margin: 0 0 52px; }
+    h2 { font: 700 clamp(1.5rem, 3.6vw, 1.95rem)/1.2 var(--font-head); letter-spacing: -0.02em; margin: 6px 0 12px; }
+    h3 { font: 700 1.15rem/1.3 var(--font-head); margin: 26px 0 8px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+    ul, ol { padding-left: 22px; margin: 0 0 12px; }
+    li { margin: 4px 0; }
+    strong { color: var(--text); }
+
+    .card { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 14px; padding: 18px 22px; margin: 14px 0; break-inside: avoid; }
+    .card.violet { border-color: var(--line); }
+    .card.cyan { border-color: rgba(6, 182, 212, 0.3); }
+    .card.peach { border-color: rgba(245, 180, 138, 0.35); }
+    .card-label { font: 700 0.74rem var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+    .violet .card-label { color: var(--violet-soft); }
+    .cyan .card-label { color: var(--cyan-soft); }
+    .peach .card-label { color: var(--peach); }
+
+    .kit-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+    .kit-num { font: 800 2.6rem/1 var(--font-head); color: var(--violet); }
+    .kit-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+    .tag { font: 0.75rem var(--font-mono); color: var(--muted); border: 1px solid var(--line-soft); border-radius: 6px; padding: 2px 8px; }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; }
+    .steps > li { counter-increment: step; position: relative; padding: 2px 0 10px 44px; margin: 0; break-inside: avoid; }
+    .steps > li::before {
+      content: counter(step); position: absolute; left: 0; top: 2px;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: grid; place-items: center;
+      font: 700 0.85rem var(--font-mono); color: var(--bg); background: var(--violet-soft);
+    }
+    .steps.cyan > li::before { background: var(--cyan-soft); }
+
+    .link-box { display: block; font: 0.85rem var(--font-mono); background: var(--bg); border: 1px dashed var(--line); border-radius: 8px; padding: 8px 12px; margin: 6px 0 4px; word-break: break-all; }
+    .prompt {
+      font: 0.92rem/1.6 var(--font-mono); background: var(--bg); border-left: 3px solid var(--violet);
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0; white-space: pre-wrap; break-inside: avoid;
+    }
+    .prompt.cyan { border-left-color: var(--cyan); }
+
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .two-col .card { margin: 0; }
+
+    dl { margin: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
+    dl div { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 10px; padding: 10px 14px; break-inside: avoid; }
+    dt { font: 700 0.95rem var(--font-head); color: var(--violet-soft); }
+    dd { margin: 2px 0 0; color: var(--muted); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin: 8px 0 14px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+    th { font: 700 0.75rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .yes { color: var(--cyan-soft); font-weight: 600; white-space: nowrap; }
+    .skip { color: var(--muted); white-space: nowrap; }
+
+    footer { border-top: 1px solid var(--line-soft); padding-top: 22px; font-size: 0.88rem; color: var(--muted); }
+
+    .kicker { display: block; break-after: avoid; }
+
+    @media print {
+      /* Light, ink-friendly version for the PDF / printing */
+      :root {
+        --bg: #FFFFFF;
+        --surface: #F7F4FC;
+        --surface-2: #F1ECFA;
+        --line: rgba(124, 58, 237, 0.35);
+        --line-soft: rgba(15, 23, 42, 0.14);
+        --violet: #7C3AED;
+        --violet-soft: #6D28D9;
+        --peach: #C2410C;
+        --cyan: #0E7490;
+        --cyan-soft: #0E7490;
+        --text: #0F172A;
+        --muted: #475569;
+      }
+      @page { size: A4; margin: 14mm 13mm; }
+      body { font-size: 11pt; background: #fff; }
+      .steps > li::before { color: #fff; }
+      .pill { background: #F1ECFA; }
+      .prompt, .link-box { background: #FAF8FE; }
+      .wrap { max-width: none; padding: 0; }
+      .pdf-btn { display: none; }
+      .topnav { margin-bottom: 18px; }
+      section { margin-bottom: 30px; }
+      .page-break { break-before: page; }
+      a { text-decoration: none; }
+      h2, h3 { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="topnav">
+    <a class="brand" href="../">
+      <img src="../assets/logo.png" alt="" width="36" height="36">
+      Women Vibe Coders
+    </a>
+    <a class="pdf-btn" href="../assets/downloads/women-vibe-coders-starter-kit.pdf" download>Download PDF</a>
+  </nav>
+
+  <header class="cover">
+    <span class="kicker">Starter Kit</span>
+    <h1>Your first steps into building with AI</h1>
+    <p class="lede">This kit walks you through three free resources, one small step at a time. It assumes you know <em>nothing</em> about coding, and that's perfectly fine. If you can write a message to a friend, you can do this.</p>
+    <div class="cover-pills">
+      <span class="pill">No installs</span>
+      <span class="pill">No coding</span>
+      <span class="pill">Free to start</span>
+      <span class="pill">Go at your own pace</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <h2>What's inside</h2>
+    <ol>
+      <li><a href="#before">Before you start</a></li>
+      <li><a href="#words">Words you'll see</a></li>
+      <li><a href="#github">How to read a GitHub page</a></li>
+      <li><a href="#kit1">Kit 1 · The Easy-Vibe course</a></li>
+      <li><a href="#kit2">Kit 2 · Pick your first tool</a></li>
+      <li><a href="#kit3">Kit 3 · The how-to guide</a></li>
+      <li><a href="#prompts">Prompts to copy</a></li>
+      <li><a href="#safety">Staying safe</a></li>
+      <li><a href="#plan">A gentle 4-week plan</a></li>
+      <li><a href="#help">Getting help</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section id="before">
+    <span class="kicker">01</span>
+    <h2>Before you start</h2>
+    <div class="two-col">
+      <div class="card cyan">
+        <span class="card-label">You need</span>
+        <ul>
+          <li>A laptop or computer (a phone works for reading, but building is easier on a bigger screen)</li>
+          <li>Internet and a web browser, such as Chrome, Safari, Edge or Firefox</li>
+          <li>An email address, to sign up for the free tools</li>
+          <li>About 30 minutes, and a warm drink ☕</li>
+        </ul>
+      </div>
+      <div class="card peach">
+        <span class="card-label">You don't need</span>
+        <ul>
+          <li>Any coding experience</li>
+          <li>To install anything</li>
+          <li>To pay for anything to get started</li>
+          <li>To understand every word you see. Skip what doesn't make sense yet.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px">How to use this kit: do <strong>Kit 1</strong> first if you like guided lessons, or jump to <strong>Kit 2</strong> if you'd rather just try building something today. Kit 3 is for reading whenever you get stuck.</p>
+  </section>
+
+  <!-- 2 -->
+  <section id="words">
+    <span class="kicker">02</span>
+    <h2>Words you'll see</h2>
+    <p class="muted">You don't need to memorise these. Come back whenever a word trips you up.</p>
+    <dl>
+      <div><dt>AI tool / AI assistant</dt><dd>A website you chat with. You type a message, it types back, and some can build things for you.</dd></div>
+      <div><dt>Prompt</dt><dd>The message you type to the AI. Writing a clear prompt is the main skill of vibe coding.</dd></div>
+      <div><dt>Vibe coding</dt><dd>Building software by describing what you want in everyday words, instead of writing code yourself.</dd></div>
+      <div><dt>App / tool / prototype</dt><dd>The thing you build: a small webpage, a checklist, a game. "Prototype" just means a first, rough version.</dd></div>
+      <div><dt>Preview</dt><dd>The window where the AI tool shows you what it built, so you can click around and try it.</dd></div>
+      <div><dt>GitHub</dt><dd>A website where people share projects and guides for free. Two of our kits live there. You can read it without an account.</dd></div>
+      <div><dt>Repository ("repo")</dt><dd>One project's page on GitHub. Think of it as a shared folder.</dd></div>
+      <div><dt>README</dt><dd>The main text of a GitHub project, shown below its list of files. This is the part you read.</dd></div>
+      <div><dt>Fork</dt><dd>A saved copy of someone's GitHub project. We forked our three kits so you'll always have a copy, even if the originals change.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 3 -->
+  <section id="github" class="page-break">
+    <span class="kicker">03</span>
+    <h2>How to read a GitHub page</h2>
+    <p>Two of the kits are on GitHub. The page can look busy and technical at first, but you only need one part of it.</p>
+    <ol class="steps">
+      <li><strong>Click the link.</strong> No account or sign-in is needed. If GitHub asks you to sign up, close that box or scroll past it.</li>
+      <li><strong>Ignore the list of files at the top.</strong> Those are for people who want to work on the project. You don't need them.</li>
+      <li><strong>Scroll down</strong> until you see large text and headings. That's the <strong>README</strong>, the actual guide.</li>
+      <li><strong>Look for "Contents" or "Table of Contents".</strong> Every item in it is a link: click one to jump to that part.</li>
+      <li><strong>Use your browser's Back button</strong> (←) to return to where you were.</li>
+    </ol>
+    <div class="card violet">
+      <span class="card-label">Tip</span>
+      <p style="margin:0">If a page is in a language you'd rather not read, Chrome and Safari can translate it: right-click anywhere on the page and choose <strong>Translate</strong>.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="kit1" class="page-break">
+    <span class="kicker">04 · Kit 1</span>
+    <div class="kit-head"><span class="kit-num">1</span><h2>The Easy-Vibe course: learn step by step</h2></div>
+    <div class="kit-meta"><span class="tag">Guided lessons</span><span class="tag">10 languages incl. English</span><span class="tag">Stage 1 ≈ 4 hours, split as you like</span></div>
+    <p>A free, friendly course with pictures and interactive demos, used by tens of thousands of learners. In the very first chapter you build a small game in your browser just by chatting with AI.</p>
+
+    <ol class="steps">
+      <li><strong>Open the course in English:</strong>
+        <span class="link-box"><a href="https://datawhalechina.github.io/easy-vibe/en/">datawhalechina.github.io/easy-vibe/en/</a></span>
+        If the page shows another language, click the language name in the top menu and choose <strong>English</strong>.</li>
+      <li><strong>Read "How to Learn This Course"</strong> first. It's a short introduction to what vibe coding is and where the course goes.
+        <span class="link-box"><a href="https://datawhalechina.github.io/easy-vibe/en/stage-1/learning-map/">…/easy-vibe/en/stage-1/learning-map/</a></span></li>
+      <li><strong>Then do "Primary 1: AI Era, If You Can Speak, You Can Code."</strong> This is the hands-on chapter where you build a Snake game.
+        <span class="link-box"><a href="https://datawhalechina.github.io/easy-vibe/en/stage-1/ai-capabilities-through-games/">…/easy-vibe/en/stage-1/ai-capabilities-through-games/</a></span></li>
+      <li><strong>Sign up for the AI tool the chapter uses.</strong> The lesson builds on a website called <strong>z.ai</strong>, which you'll need to sign up for with your email. The course also lists <strong>Google AI Studio</strong> (<a href="https://aistudio.google.com/apps">aistudio.google.com/apps</a>) as a recommended alternative if you already have a Google account.</li>
+      <li><strong>Follow along at your own pace.</strong> Copy the course's example messages into the AI tool, look at what it builds, then change one small thing. Stop whenever you like; the page will be there tomorrow.</li>
+      <li><strong>Stop after Stage 1.</strong> Stages 2 and 3 go into more technical topics like databases and deployment. They're great for later, but not needed to get started.</li>
+    </ol>
+    <div class="card peach">
+      <span class="card-label">Remember</span>
+      <p style="margin:0">As the course itself says: <em>completion is more important than perfection.</em> A wobbly game you finished beats a perfect one you never started.</p>
+    </div>
+    <p class="muted">Our saved copy (fork) on GitHub: <a href="https://github.com/Gigi1111/easy-vibe">github.com/Gigi1111/easy-vibe</a>. Original by <a href="https://github.com/datawhalechina/easy-vibe">Datawhale</a>. Please use their website above for reading; the GitHub copy is a backup.</p>
+  </section>
+
+  <!-- 5 -->
+  <section id="kit2" class="page-break">
+    <span class="kicker">05 · Kit 2</span>
+    <div class="kit-head"><span class="kit-num">2</span><h2>Awesome Vibe Coding: pick your first tool</h2></div>
+    <div class="kit-meta"><span class="tag">A list of tools</span><span class="tag">On GitHub</span><span class="tag">10 minutes to choose</span></div>
+    <p>A popular, well-kept list of AI building tools. You don't read it top to bottom. Use it like a menu: pick <strong>one</strong> tool and try it.</p>
+
+    <ol class="steps">
+      <li><strong>Open the list:</strong>
+        <span class="link-box"><a href="https://github.com/Gigi1111/awesome-vibe-coding#browser-based-tools">github.com/Gigi1111/awesome-vibe-coding</a></span>
+        Scroll down past the file list (see <a href="#github">How to read a GitHub page</a>).</li>
+      <li><strong>In "Contents", click "Browser-based Tools".</strong> These run inside your web browser, so there's nothing to install.</li>
+      <li><strong>Pick one tool.</strong> If you can't decide, try one of these three from the list. Each lets you describe an app in plain words and shows you a live preview:
+        <ul>
+          <li><strong>Lovable</strong> (lovable.dev)</li>
+          <li><strong>Bolt.new</strong> (bolt.new)</li>
+          <li><strong>Replit</strong> (replit.com)</li>
+        </ul>
+      </li>
+      <li><strong>Sign up with your email.</strong> Most of these let you try a number of messages for free. Free limits change often, so check the tool's pricing page, and <strong>don't enter card details</strong> unless you've decided you want to pay.</li>
+      <li><strong>Skip the other sections for now.</strong> "IDEs", "Plugins", "Command Line Tools" and "Local Apps" are for people who already code.</li>
+    </ol>
+
+    <h3>Your first 15-minute project</h3>
+    <ol class="steps cyan">
+      <li>In the tool you chose, find the big text box (it often says something like "What do you want to build?").</li>
+      <li>Paste <a href="#prompts">your first prompt</a> from this kit, or describe a small thing you wish existed in your daily life.</li>
+      <li>Press Enter and wait about a minute. Watch the preview appear.</li>
+      <li>Click around your new app. What do you like? What feels off?</li>
+      <li>Ask for <strong>one</strong> change, e.g. "Make the buttons bigger and the colours softer."</li>
+      <li>Done! Take a screenshot and share it in our Discord. Every tiny build counts. 🎉</li>
+    </ol>
+    <p class="muted">Original list by Filipe Calegario, shared under CC0 (public domain): <a href="https://github.com/filipecalegario/awesome-vibe-coding">github.com/filipecalegario/awesome-vibe-coding</a>.</p>
+  </section>
+
+  <!-- 6 -->
+  <section id="kit3">
+    <span class="kicker">06 · Kit 3</span>
+    <div class="kit-head"><span class="kit-num">3</span><h2>How to Vibe Code: read when you get stuck</h2></div>
+    <div class="kit-meta"><span class="tag">A long written guide</span><span class="tag">On GitHub</span><span class="tag">Read in small pieces</span></div>
+    <p>A thorough guide written for complete beginners. Some parts assume you'll install a programming language called Python. <strong>You can skip those.</strong> The thinking and prompting advice works with any tool.</p>
+
+    <ol class="steps">
+      <li><strong>Open the guide:</strong>
+        <span class="link-box"><a href="https://github.com/Gigi1111/how-to-vibe-code">github.com/Gigi1111/how-to-vibe-code</a></span>
+        Scroll past the files to the <strong>Table of Contents</strong>.</li>
+      <li><strong>Read only these sections</strong> by clicking them in the Table of Contents:</li>
+    </ol>
+    <table>
+      <thead><tr><th>Section</th><th>Read it?</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>2. Mindset and Philosophy</td><td class="yes">✓ Read</td><td>How to think about working with AI</td></tr>
+        <tr><td>7. Prompting: The Core Skill</td><td class="yes">✓ Read</td><td>How to ask so you get what you want</td></tr>
+        <tr><td>9. Debugging With AI</td><td class="yes">✓ Read</td><td>What to do when something breaks</td></tr>
+        <tr><td>13. Common Pitfalls</td><td class="yes">✓ Read</td><td>Mistakes everyone makes, and the fixes</td></tr>
+        <tr><td>11. Security and Secrets</td><td class="yes">✓ Skim</td><td>The first few rules matter for everyone</td></tr>
+        <tr><td>3–5, 8, 10, 14</td><td class="skip">Skip for now</td><td>Setup and coding for programmers</td></tr>
+        <tr><td>15. A 30-Day Practice Plan</td><td class="skip">Later</td><td>Python-based; see our gentler plan below</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The short version, in plain words</h3>
+    <div class="card violet">
+      <span class="card-label">A good prompt has 4 parts</span>
+      <ol style="margin:0">
+        <li><strong>Context:</strong> what you're making and who it's for</li>
+        <li><strong>Task:</strong> the one thing you want done right now</li>
+        <li><strong>Limits:</strong> what it should or shouldn't do</li>
+        <li><strong>What you want back:</strong> what success looks like</li>
+      </ol>
+    </div>
+    <div class="prompt">Context: I'm making a simple webpage for my book club of 8 friends.
+Task: Make a page that lists the book we're reading this month and the date of our next meeting.
+Limits: Keep it to one page, with big readable text and soft colours. No sign-up or login.
+What I want back: A finished page I can see in the preview.</div>
+
+    <div class="two-col">
+      <div class="card cyan">
+        <span class="card-label">When it breaks</span>
+        <p style="margin:0">Tell the AI exactly what you did, what you expected, and what happened instead. If there's an error message, copy <strong>all</strong> of it into the chat.</p>
+      </div>
+      <div class="card cyan">
+        <span class="card-label">Stuck in a loop?</span>
+        <p style="margin:0">If every fix breaks something else, stop. Go back to the last version that worked and describe the problem fresh in a new chat.</p>
+      </div>
+      <div class="card cyan">
+        <span class="card-label">It changed too much?</span>
+        <p style="margin:0">Say: "Only change the button colour. Don't touch anything else."</p>
+      </div>
+      <div class="card cyan">
+        <span class="card-label">Sounds sure, but wrong?</span>
+        <p style="margin:0">AI can explain confidently and still be mistaken. Click and test it yourself rather than trusting the explanation.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px">Summary adapted from <em>How to Start Vibe Coding</em> by ai-for-developers, shared under CC0 (public domain): <a href="https://github.com/ai-for-developers/how-to-vibe-code">github.com/ai-for-developers/how-to-vibe-code</a>.</p>
+  </section>
+
+  <!-- 7 -->
+  <section id="prompts" class="page-break">
+    <span class="kicker">07</span>
+    <h2>Prompts to copy</h2>
+    <p class="muted">Copy any of these into your AI tool as they are, or change the details to fit your life.</p>
+
+    <h3>Your first build</h3>
+    <div class="prompt">Make me a calm, mobile-friendly checklist where I can tap three breakfast ideas for tomorrow morning. Use soft colours and big buttons.</div>
+    <div class="prompt">Build a cozy reading tracker where I can log a few pages before bed and see a gentle progress bar for my five favourite books.</div>
+    <div class="prompt">Create a simple page that shows a different kind, encouraging message each time I press a button.</div>
+
+    <h3>Gentle helpers while you build</h3>
+    <div class="prompt cyan">Explain this in plain English before changing anything.</div>
+    <div class="prompt cyan">Make the buttons larger and calmer to read.</div>
+    <div class="prompt cyan">Walk me through the simplest way to share this with a friend.</div>
+    <div class="prompt cyan">I'm a complete beginner. Ask me 3 questions about what I want before you start building.</div>
+    <div class="prompt cyan">Only change the colour of the title. Don't touch anything else.</div>
+  </section>
+
+  <!-- 8 -->
+  <section id="safety">
+    <span class="kicker">08</span>
+    <h2>Staying safe</h2>
+    <div class="card peach">
+      <span class="card-label">Never paste into an AI tool or your app</span>
+      <ul style="margin:0">
+        <li>Passwords, PINs or bank and card details</li>
+        <li>"API keys" or secret codes that a website gives you</li>
+        <li>Other people's personal information, like names, addresses or photos, without their permission</li>
+        <li>Anything about children that you wouldn't post publicly</li>
+      </ul>
+    </div>
+    <ul>
+      <li><strong>Check before you pay.</strong> Free plans are enough to learn. Only add card details when you've decided to.</li>
+      <li><strong>Be careful with "publish" or "deploy" buttons.</strong> They make your app public on the internet. That's great for sharing, as long as there's nothing private in it.</li>
+      <li><strong>Trust, but check.</strong> AI can be wrong. Test what it builds, and ask: "What could go wrong with this?"</li>
+    </ul>
+  </section>
+
+  <!-- 9 -->
+  <section id="plan">
+    <span class="kicker">09</span>
+    <h2>A gentle 4-week plan</h2>
+    <p class="muted">One short session a week is plenty. Skip a week whenever life happens.</p>
+    <div class="two-col">
+      <div class="card violet"><span class="card-label">Week 1 · Warm up</span><p style="margin:0">Read "How to Learn This Course" (Kit 1), then build the Snake game from "Primary 1". It doesn't need to be finished.</p></div>
+      <div class="card violet"><span class="card-label">Week 2 · Your own idea</span><p style="margin:0">Pick a tool from Kit 2. Build one tiny thing for your own life: a checklist, a tracker or a family page.</p></div>
+      <div class="card violet"><span class="card-label">Week 3 · Make it better</span><p style="margin:0">Improve last week's build with three small changes. Read "Prompting" and "Common Pitfalls" in Kit 3.</p></div>
+      <div class="card violet"><span class="card-label">Week 4 · Share it</span><p style="margin:0">Show your build to a friend or in our Discord, and come to a gathering, or bring someone new.</p></div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="help">
+    <span class="kicker">10</span>
+    <h2>Getting help</h2>
+    <p>Stuck, unsure, or just proud of something tiny? We'd love to hear from you. There are no silly questions here.</p>
+    <div class="two-col">
+      <div class="card cyan">
+        <span class="card-label">Ask &amp; share</span>
+        <p style="margin:0">Join our Discord:<br><a href="https://discord.gg/z2NAsePDAG">discord.gg/z2NAsePDAG</a></p>
+      </div>
+      <div class="card violet">
+        <span class="card-label">Meet in person</span>
+        <p style="margin:0">Find a cozy gathering near you:<br><a href="https://luma.com/calendar/cal-Pkz6yetEPWfvMfW">luma.com/calendar/cal-Pkz6yetEPWfvMfW</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Women Vibe Coders</strong> · <a href="https://gigi1111.github.io/women-vibe-coder-website/">gigi1111.github.io/women-vibe-coder-website</a></p>
+    <p>Credits: Easy-Vibe course by Datawhale (linked, not copied). Awesome Vibe Coding by Filipe Calegario and How to Start Vibe Coding by ai-for-developers, both CC0 (public domain). Tool names belong to their owners; we're not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>
