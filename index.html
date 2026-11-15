@@ -6,6 +6,16 @@
   <meta name="artifact-type" content="narrative">
   <meta name="design-style" content="neon_noir">
   <title>Women Vibe Coders — A Cozy Space to Build with AI</title>
+  <meta name="description" content="A warm, low-pressure community for women, moms and first-time builders to create software with AI.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#07070d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Women Vibe Coders — A Cozy Space to Build with AI">
+  <meta property="og:description" content="A warm, low-pressure community for women, moms and first-time builders to create software with AI.">
+  <meta property="og:url" content="https://gigi1111.github.io/women-vibe-coder-website/">
+  <meta property="og:image" content="https://gigi1111.github.io/women-vibe-coder-website/assets/og-image.png">
+  <meta name="twitter:card" content="summary">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,6 +164,20 @@
       align-items: center;
       gap: var(--space-md);
       flex-wrap: wrap;
+    }
+    .brand-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25), 0 0 18px rgba(168, 85, 247, 0.18);
+      flex-shrink: 0;
     }
     .brand-title {
       font-family: var(--font-headline);
@@ -1081,7 +1105,10 @@
     <header>
       <div class="topbar">
         <div class="brand-group">
-          <span class="brand-title" data-editable="brandTitle">Women Vibe Coders</span>
+          <span class="brand-home">
+            <img class="brand-logo" src="assets/logo.png" width="40" height="40" alt="Women Vibe Coders logo: a coffee cup with a prompt chevron">
+            <span class="brand-title" data-editable="brandTitle">Women Vibe Coders</span>
+          </span>
           <nav class="nav-links" aria-label="Page sections">
             <a class="nav-anchor" href="#what-is-vibe-coding">What It Is</a>
             <a class="nav-anchor" href="#bring-to-your-city">Host Guide</a>
